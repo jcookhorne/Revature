@@ -1,0 +1,32 @@
+package classes_and_objects;
+
+import java.util.Scanner;
+
+public class RoomMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		double price = 22.50;
+		Scanner sc = new Scanner(System.in);
+	
+		
+		
+		RoomAssignment  ra;
+		ra = new RoomAssignment();
+		System.out.println("What is the width of your room");
+		ra.width = sc.nextInt();
+		System.out.println("What is the width of your room");
+		ra.height =  sc.nextInt();
+		System.out.println("What is the desired color of your room");
+		ra.color = sc.nextLine();
+		System.out.println("how many walls are in your room");
+		ra.howManyWalls = 4;
+		sc.close();
+		
+		System.out.println(ra.calculateArea());
+		System.out.println(ra.bathroomWithin());
+		System.out.println(ra.calculateWallsPaint(price));
+		
+	}
+
+}

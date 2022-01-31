@@ -1,0 +1,12 @@
+package classes_and_objects;
+
+public class BankClasses {
+	String username;
+	String password;
+	String choices;
+	
+	String CreateAccount(String user, String pass)
+	{
+		return "Your account name is : " + user + "and the password : " + pass;
+	}
+}

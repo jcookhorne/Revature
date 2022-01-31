@@ -1,0 +1,56 @@
+package classes_and_objects;
+
+import java.util.Scanner;
+
+public class BankClasses {
+	String username;
+	String password;
+	double balance;
+	String response;
+	
+	
+	
+	
+	
+	String CreateAccount(String user, String pass)
+	{
+		return "Your account name is : " + user + " and the password : " + pass;
+	}
+	Double Balance(double currentBalance) {
+		System.out.println("your current balance");
+		return currentBalance;
+	}
+	Double Withdraw(double amt) {
+		double withdrawA =0;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("How much would you like to withdraw");
+		withdrawA = sc.nextDouble();
+		double newBalance;
+		newBalance = balance - amt;
+		return newBalance;
+	}
+	
+
+	Double BalanceChoice(String answer) {
+		if (answer.contentEquals("yes")) {
+			return Balance(balance);
+		}else {
+			System.out.println("Understood.");
+			return null;
+			
+		}
+	}
+	Double WithdrawChoice(String answer) {
+		if (answer.contentEquals("yes")) {
+			return Withdraw(balance);
+		}else {
+			System.out.println("Understood.");
+			return  null;
+			
+		}
+	}
+	
+	
+	
+	
+}

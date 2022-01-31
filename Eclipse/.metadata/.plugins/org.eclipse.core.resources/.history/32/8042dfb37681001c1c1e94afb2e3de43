@@ -1,0 +1,20 @@
+package arrayassignments;
+
+import java.util.Scanner;
+
+public class MatrixAddition {
+
+	// add 2 matrix's together
+	
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int Matrix [] [] = new int [2]  [2];
+		Matrix [1][1];
+		
+		
+		
+	}
+	
+	
+}

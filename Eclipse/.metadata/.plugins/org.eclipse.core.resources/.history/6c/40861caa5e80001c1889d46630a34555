@@ -1,0 +1,28 @@
+package control_loop_assignment;
+
+import java.util.Scanner;
+
+public class IsPrime {
+	
+	public static void IsItPrime() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter the first number");
+		String output = "";
+		int num = sc.nextInt();
+		for(int i = 2; i <=num; i++) {
+			if(num%i == 0) {
+				output = "The number is prime";
+			}else {
+				output = "The number is not prime";
+				//System.out.println("the number is not prime");
+			}
+			
+		}
+		}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,26 @@
+package classes_and_objects;
+
+import java.util.Scanner;
+
+public class BankMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		
+		BankClasses bc;
+		bc = new BankClasses();
+		System.out.println("Please Create your account first");
+		System.out.println("What is your username");
+		bc.username = sc.nextLine();
+		System.out.println("What is your password");
+		bc.password = sc.nextLine();
+		System.out.println("Account Created!!");
+		System.out.println("What would you like to do.")
+		bc.choices = sc.nextLine();
+		
+		
+		
+	}
+
+}

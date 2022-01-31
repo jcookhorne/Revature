@@ -1,0 +1,22 @@
+package classes_and_objects;
+
+public class BankClasses {
+	String username;
+	String password;
+	String choices;
+	double balance;
+	
+	String CreateAccount(String user, String pass)
+	{
+		return "Your account name is : " + user + "and the password : " + pass;
+	}
+	Double Balance(double currentBalance) {
+		return currentBalance;
+	}
+	Double Withdraw(double amt) {
+		double newBalance;
+		newBalance = balance - amt;
+		return newBalance;
+	}
+	
+}

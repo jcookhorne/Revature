@@ -1,0 +1,15 @@
+
+public class VariableDemo {
+	public static void main(String[] args) {
+		// declare a variable
+		int englishGrade;
+		// assigned a value to the variable
+		englishGrade = 20;
+		// initialize a variable
+		int mathGrade = 50;
+		
+		System.out.println("English Grade" + englishGrade);
+		System.out.println("Math Grade" + mathGrade);
+		
+	}
+}

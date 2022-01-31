@@ -1,0 +1,16 @@
+package arrayassignments;
+
+public class IrregularArray {
+	public static void main(String[] args) {
+		
+		// In an irregular array, the number of elements in at least one dimension is unknown. This number may vary within this dimension.
+		int [][] irr = new int [3][];
+		
+		
+		
+		
+		
+		
+	}
+
+}

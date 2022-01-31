@@ -1,0 +1,35 @@
+package flow_control_and_loops;
+
+public class LoopsDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//print hello java 10 time to the console
+		
+		int  i=1;
+		while(i<=10) {
+			System.out.println("Hello Java");
+			i++;
+		}
+	
+		int number  = 8;
+		int j = 1;
+		do {
+			System.out.println(j);
+			// expression
+			j++;
+		}while (j <= number);
+	
+		
+	// print all even numbers up to N
+	int num = 45;
+	for(int l = 1; l<=number; l++) {
+		if(i%2 == 0) {
+			System.out.println(number);
+		}
+	}
+	
+	
+	}
+
+}

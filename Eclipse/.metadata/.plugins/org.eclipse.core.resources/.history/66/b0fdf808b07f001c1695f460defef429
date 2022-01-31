@@ -1,0 +1,10 @@
+package flow_control_and_loops;
+
+public class SwitchCaseDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

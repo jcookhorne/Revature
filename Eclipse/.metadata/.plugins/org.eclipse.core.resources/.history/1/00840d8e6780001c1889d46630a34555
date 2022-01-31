@@ -1,0 +1,33 @@
+package classes_and_objects;
+
+import java.util.Scanner;
+
+public class BankMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		double currentBalance = 1789.00;
+		double withdrawA;
+		BankClasses bc;
+		bc = new BankClasses();
+		System.out.println("Please Create your account first");
+		System.out.println("What is your username");
+		bc.username = sc.nextLine();
+		System.out.println("What is your password");
+		bc.password = sc.nextLine();
+		System.out.println("Account Created!!");
+		System.out.println("your current balance");
+		//bc.choices = sc.nextLine();
+		System.out.println(bc.Balance(currentBalance));
+		System.out.println("How much would you like to withdraw");
+		withdrawA = sc.nextDouble();
+		bc.update = withdrawA;
+		System.out.println(bc.Withdraw(withdrawA));
+		
+		
+		
+		
+	}
+
+}

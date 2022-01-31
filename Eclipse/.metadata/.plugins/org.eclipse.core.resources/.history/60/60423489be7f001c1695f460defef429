@@ -1,0 +1,117 @@
+package flow_control_and_loops;
+
+import java.util.Scanner;
+
+public class LoopAssignments {
+
+	public static void main(String[] args) {
+		// Please uncomment the program you want to play!!!
+		
+		
+		// print the greater of 2 numbers
+		//greaterOfTwo();
+		
+		
+		//Print the greatest of 3 numbers
+		//greaterOfThree();
+		
+		// Print if a number is even or odd
+		//evenOdd();
+		
+		//Print odd numbers up to N
+		//oddUpTo();
+		
+		//Print the factorial of a number
+		//factorial();
+		
+		// Print if a number is prime or not
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter the first number");
+		String output = "";
+		int num1 = sc.nextInt();
+		for(int i = 1; i <=num1; i++) {
+			if(num1%i != 0) {
+				output = "The number is prime";
+				
+			}else {
+				output = "The number is not prime";
+				//System.out.println("the number is not prime");
+			}
+			
+		}
+		System.out.println(output);
+	}
+		
+	
+	
+public static void greaterOfTwo() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter the first number");
+		int num1 = sc.nextInt();
+		System.out.println("Please enter the second number");
+		int num2 = sc.nextInt();
+		
+		if(num1>num2) {
+			System.out.println("the first number entered is larger : " + num1);
+			
+		}else {
+			System.out.println("The second number entered is larger : " + num2);
+		}
+	}
+	
+public static void greaterOfThree() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter the first number");
+		int num1 = sc.nextInt();
+		System.out.println("Please enter the second number");
+		int num2 = sc.nextInt();
+		System.out.println("Please enter the third number");
+		int num3 = sc.nextInt();
+		
+		if(num1 > num2 && num1 > num3) {
+			System.out.println("the first number entered is larger : " + num1);
+			
+		}else if(num2 > num1 && num2 > num3){
+			System.out.println("The second number entered is larger : " + num2);
+		}else if (num3 > num1 && num3 > num2) {
+			System.out.println("The third number entered is larger : " + num3);
+		}
+		
+	}
+
+public static void evenOdd() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter number and I will tell you if its odd or even!!");
+		int num1 = sc.nextInt();
+		if (num1%2 == 0) {
+			System.out.println("The number you entered is even");
+		}else if (num1%2 != 0) {
+			System.out.println("The number you entered is odd");
+		}
+	}
+	
+public static void oddUpTo() {
+	Scanner sc = new Scanner(System.in);
+	System.out.println("Please enter the max number you would like the odd counter to go to");
+	int num1 = sc.nextInt();
+	for (int i = 1; i<=num1; i = i+2) {
+		System.out.println(i);
+	}
+	
+}
+
+public static void factorial() {
+	Scanner sc = new Scanner(System.in);
+	System.out.println("Please enter the number you want the factorial of");
+	int num1 = sc.nextInt();
+	int update = 1;
+	for(int i = num1; i > 0; i--) {
+		
+		update = update *i;
+	}
+	System.out.println(update);
+}
+
+}
+
+

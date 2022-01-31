@@ -1,0 +1,38 @@
+package control_loop_assignment;
+
+import java.util.Scanner;
+
+public class GreaterThanTwo {
+public static int greaterOfTwo(int num1, int num2) {
+	
+	
+		
+		if(num1>num2) {
+			//System.out.println("the first number entered is larger : " + num1);
+			return num1 ;
+			
+		}else {
+			//System.out.println("The second number entered is larger : " + num2);
+			return num2;
+		}
+		
+	}
+	public static void main(String[] args) {
+		// input
+		//Print the greater of 2 numbers
+				Scanner sc = new Scanner(System.in);
+				System.out.println("Please enter the first number");
+				int num1 = sc.nextInt();
+				System.out.println("Please enter the second number");
+				int num2 = sc.nextInt();
+				sc.close();
+		// TODO Auto-generated method stub
+				
+				
+				//output
+				System.out.println("This is the bigger number" + greaterOfTwo(num1, num2));
+				//greaterOfTwo(num1, num2);
+
+	}
+
+}

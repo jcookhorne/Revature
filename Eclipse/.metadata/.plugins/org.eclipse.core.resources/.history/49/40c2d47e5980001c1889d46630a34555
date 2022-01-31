@@ -1,0 +1,21 @@
+package control_loop_assignment;
+
+public class EvenOdd {
+
+	public static String evenOdd(int num1) {
+		String output = "";
+		if (num1%2 == 0) {
+			return output ="The number you entered is even" ;
+		}else if (num1%2 != 0) {
+			return output ="The number you entered is odd" ;
+			
+		}
+		return output;
+		
+}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

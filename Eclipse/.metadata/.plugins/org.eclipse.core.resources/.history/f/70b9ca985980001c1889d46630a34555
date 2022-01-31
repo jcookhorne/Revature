@@ -1,0 +1,27 @@
+package control_loop_assignment;
+
+import java.util.Scanner;
+
+public class EvenOdd {
+
+	public static String evenOdd(int num1) {
+		String output = "";
+		if (num1%2 == 0) {
+			 output ="The number you entered is even" ;
+		}else if (num1%2 != 0) {
+			 output ="The number you entered is odd" ;
+			
+		}
+		return output;
+		
+}
+	public static void main(String[] args) {
+		System.out.println("Please enter number and I will tell you if its odd or even!!");
+		Scanner sc = new Scanner(System.in);
+		int num1 = sc.nextInt();
+		evenOdd(num1);
+		// TODO Auto-generated method stub
+
+	}
+
+}

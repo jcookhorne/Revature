@@ -1,0 +1,32 @@
+package classes_and_objects;
+
+public class BankClasses {
+	String username;
+	String password;
+	String choices;
+	double balance;
+	
+	String Login(String userL, String passL) {
+		if (userL.contentEquals(username) && passL.contentEquals(password)) {
+			return "Welocome back " + username;
+		}else {
+			return "Please create an account";
+			
+		}
+	}
+	
+	
+	String CreateAccount(String user, String pass)
+	{
+		return "Your account name is : " + user + " and the password : " + pass;
+	}
+	Double Balance(double currentBalance) {
+		return currentBalance;
+	}
+	Double Withdraw(double amt) {
+		double newBalance;
+		newBalance = balance - amt;
+		return newBalance;
+	}
+	
+}

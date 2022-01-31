@@ -1,0 +1,22 @@
+package classes_and_objects;
+
+public class RoomMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		double price = 22.50;
+		RoomAssignment  ra;
+		ra = new RoomAssignment();
+		
+		ra.width = 10;
+		ra.height = 15;
+		ra.color = "Baby Blue!!";
+		ra.howManyWalls = 4;
+		
+		System.out.println(ra.calculateArea());
+		System.out.println(ra.bathroomWithin());
+		System.out.println(ra.calculateWallsPaint(price));
+		
+	}
+
+}

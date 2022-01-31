@@ -1,0 +1,16 @@
+package arrayassignments;
+
+public class IrregularArray {
+	public static void main(String[] args) {
+		
+		// 
+		int [][] irr = new int [3][];
+		
+		
+		
+		
+		
+		
+	}
+
+}
