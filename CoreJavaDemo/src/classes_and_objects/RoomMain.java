@@ -11,21 +11,33 @@ public class RoomMain {
 	
 		
 		
-		Room  rm;
-		rm = new Room();
+		Room  room1 = new Room(85, 120);
 		System.out.println("What is the width of your room");
-		rm.width = sc.nextInt();
-		System.out.println("What is the width of your room");
-		rm.height =  sc.nextInt();
-		System.out.println("What is the desired color of your room");
-		rm.color = sc.nextLine();
-		System.out.println("how many walls are in your room");
-		rm.howManyWalls = 4;
+		room1.width = sc.nextInt();
+		System.out.println("What is the length of your room");
+		room1.length =  sc.nextInt();
+		//System.out.println("What is the desired color of your room");
+		//room1.color = sc.nextLine();
+		//System.out.println("how many walls are in your room");
+		//room1.howManyWalls = 4;
+		Room room2 = new Room(300,150);
+		System.out.println("Painting Cost : " + room2.calculatePaintingCost(23));
+		System.out.println("Floor area: " + room2.calculateArea());
+		
+		
+		Room room3 = new Room(400, 200, 101, "Blue");
+		
+		
+		
+		
+		
+		
+		
 		sc.close();
 		
-		System.out.println(rm.calculateArea());
-		System.out.println(rm.bathroomWithin());
-		System.out.println(rm.calculateWallsPaint(price));
+		System.out.println(room1.calculateArea());
+		System.out.println(room1.bathroomWithin());
+		System.out.println(room1.calculateWallsPaint(price));
 		
 	}
 
