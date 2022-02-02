@@ -1,5 +1,8 @@
 package interfacesandabstractclasses;
 
-public class SafetyGuideLines2022 {
+public interface SafetyGuideLines2022 {
+	void Helmet();
+	
+	void Boots();
 
 }

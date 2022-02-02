@@ -13,8 +13,9 @@ public class FordTruck350 extends FordTruck {
 		return " airbags are popped";
 	}
 
+	@Override
 	String applyBrake() {
-		super.applyBrake(); // used to call the overridden method
+		// used to call the overridden method
 		// of the parent class it has to be the first line
 		return " ABS Break applied";
 	}
