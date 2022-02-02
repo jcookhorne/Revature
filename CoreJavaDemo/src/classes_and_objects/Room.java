@@ -23,10 +23,15 @@ public class Room {
 	// creates options which is why you would do it
 	// constructor overloading - a type of polymorphism,
 	public Room(int length, int width, int roomNo, String color) {
-		this.length = length;
-		this.width = width;
+		// constructor chaining this() thats how you chain constructors
+		// if another constructor has already called something then you can chain to it
+		
+		this(length, width);
 		this.color = color;
 		this.roomNo = roomNo;
+		
+		
+		
 		
 	}
 	
