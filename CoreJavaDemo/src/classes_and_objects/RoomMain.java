@@ -31,7 +31,7 @@ public class RoomMain {
 		System.out.println("Floor area: " + room3.calculateArea());
 		System.out.println("Room color : " + room3.color);
 		System.out.println("Floor area: " + room3.roomNo);
-		
+		System.out.println(room2);
 		
 		
 		

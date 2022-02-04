@@ -7,7 +7,7 @@ public class FordDemo {
 		// primitive type
 
 		FordTruck fordTruck; // no object was made here
-		fordTruck = new FordTruck("Ford 150"); // object is created --- that is why we use the new keyword
+		fordTruck = new FordTruck(10, "Ford 150", null, null); // object is created --- that is why we use the new keyword
 
 //		fordTruck.modelNo = 123456789;
 //		fordTruck.color = "Black";

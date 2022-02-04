@@ -4,7 +4,7 @@ public class FordTruck350 extends FordTruck {
 	// child class
 
 	FordTruck350(String carName) {
-		super(carName);// super refers to the immiediate super class FordTruck
+		super();// super refers to the immiediate super class FordTruck
 
 		// TODO Auto-generated constructor stub
 	}

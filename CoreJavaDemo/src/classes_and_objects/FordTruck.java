@@ -9,7 +9,18 @@ public class FordTruck {
 	private String carType;
 	private String carName;
 
-	FordTruck(String carName) {
+	
+
+	public FordTruck() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public FordTruck(int modelNo, String color, String carType, String carName) {
+		super();
+		this.modelNo = modelNo;
+		this.color = color;
+		this.carType = carType;
 		this.carName = carName;
 	}
 
@@ -69,5 +80,12 @@ public class FordTruck {
 	String manualBrakeSystem() {
 		return "User applied brake";
 	}
+
+	@Override
+	public String toString() {
+		return "FordTruck [modelNo=" + modelNo + ", color=" + color +" ]";
+	}
+	
+	
 
 }

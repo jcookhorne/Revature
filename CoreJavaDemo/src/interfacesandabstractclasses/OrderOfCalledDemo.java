@@ -4,7 +4,7 @@ public class OrderOfCalledDemo {
 	public static void main(String[] args) {
 		
 		OrderOfCalledC c = new OrderOfCalledC();
-		
-		System.out.println(c);
+		OrderOfCalledB b = new OrderOfCalledB();
+		//System.out.println(c);
 	}
 }
