@@ -80,11 +80,23 @@ public class BookDaoImpl implements BookDao {
 			}
 		}
 		// iterating an ArrayList using enhanced for loop
-		
+		for (BookPojo book : allBooks) {
+			if(book.getBookId() == bookId) {
+				returnBookPojo = book;
+				break;
+			}
+		}
 		
 		// iterating an ArtrayList using a for loop
-
+		//removeIf interal iterator
+		List<BookPojo> allReturnBook = new ArrayList<BookPojo>(allBooks);
+		allReturnBook.removeIf((book) -> book.getBookId() != bookId);
+		if (allReturnBook.size() ==1) {
+			returnBookPojo = allReturnBook.get(0);
+		}
 		return returnBookPojo;
+		
+		
 
 	}
 

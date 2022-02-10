@@ -33,12 +33,16 @@ public class TwoDArrayDemo {
 				}
 				System.out.println();
 			}
-			int d = 0;
-			/// initialize an array
-			int [] scores = new int [5];
-			for( d = 0; d<scores.length;d++) {
-				scores[d] = sc.nextInt();
+//			int d = 0;
+//			/// initialize an array
+//			int [] scores = new int [5];
+//			for( d = 0; d<scores.length;d++) {
+//				scores[d] = sc.nextInt();
 				
+			//}
+			int[] arr1 = {1,2,3,4};
+			for(int i= 0; i<arr1.length; i++) {
+				System.out.print(arr1[i] + " ");
 			}
 			//System.out.print(scores[d] - 1);
 			
