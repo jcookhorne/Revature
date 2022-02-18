@@ -1,5 +1,7 @@
 package firstweek;
 
+import java.util.Scanner;
+
 public class awfda {
 		
 	
@@ -13,9 +15,19 @@ public class awfda {
 //        }
 //        System.out.println(" ");
 //    } 
-		String string1 = "TEST";
-		System.out.println(string1.equals(string1.toLowerCase()));
-
+		String str = "TEST";
+		String str2 = "";
+		for(int i = 0; i<str.length(); i++) {
+			char ch = str.charAt(i);
+			str2 = ch+str2;
+		};
+		System.out.println(str2);
+		
+		
+		
+		Scanner sc = new Scanner(System.in);
+        int q = sc.nextInt();
+        String s = sc.nextLine();
 	
 	}
 	

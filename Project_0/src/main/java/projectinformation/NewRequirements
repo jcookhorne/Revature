@@ -1,0 +1,68 @@
+	Project 0
+P0 - Bank Management System
+Bank Management System is a Java console based application.
+ Please choose a bank name of your choice. 
+ It has to be a maven project and follow three layered architecture - 
+ Presentation Layer, Service Layer, Dao(Data Access Object) Layer. 
+ 
+ 
+ The project should have the following features 
+ As an employee, 
+ - should be able to login 
+ - should be able to register/create a customer after logging in 
+ - should be able to list all the customers' information after logging in 
+ - should be able to logout 
+ 
+ 
+ 
+ As a customer, 
+ - should be able to login
+  - should be able to view account details 
+  - should be able to transfer money to another account 
+  - should be able to view transaction history 
+  - should be able to logout 
+  
+  
+ The console menus should look as follows 
+  
+  ---------------------------------------------------
+  needs to log to a file
+  ---------------------------------------------------------
+  needs to be tested with j-unit
+  ---------------------------------------------------
+  every method in dao impl should throw a system exception - and make that a custom exception.
+  ---------------------------------------------------
+  date needs to be added for transaction history
+  Local DateTime
+  
+  -------------------------------------------------------
+  MAIN MENU 
+----------------- 
+  1. Login as an Employee 
+  2. Login as a Customer
+3. Exit EMPLOYEE MENU 
+----------------------- 
+1. Register/Create a Customer 
+2. List all Customers 
+3. Logout
+
+
+ CUSTOMER MENU -
+------------------------ 
+1. View account details 
+2. Transfer money 
+3. View Transaction History 
+4. Logout ALL THE BEST!!
+
+
+
+
+----------------------------------
+Grading
+------------------------
+1. the project should be up and running
+2. min functionalities implemented
+3. all functionalities implemented
+4) exception handling flow taken care of
+5. Juint test methods for service layer
+6. Logging taken care of
