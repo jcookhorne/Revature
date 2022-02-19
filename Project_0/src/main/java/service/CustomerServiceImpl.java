@@ -8,7 +8,11 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	CustomerDao customerDao;
 	
-	
+	@Override
+	public CustomerPojo customerLogin(CustomerPojo customerPojo) {
+		// TODO Auto-generated method stub
+		return customerDao.customerLogin(customerPojo);
+	}
 
 	public CustomerServiceImpl() {
 		customerDao = new CustomerDaoImpl();
@@ -38,5 +42,7 @@ public class CustomerServiceImpl implements CustomerService{
 		
 		return customerDao.creatingAccount(customerPojo);
 	}
+
+	
 
 }

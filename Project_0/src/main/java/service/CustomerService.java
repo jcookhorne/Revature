@@ -13,5 +13,5 @@ public interface CustomerService {
 
 	CustomerPojo creatingAccount(CustomerPojo customerPojo);
 
-
+	CustomerPojo customerLogin(CustomerPojo customerPojo);
 }

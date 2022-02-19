@@ -14,4 +14,5 @@ public interface CustomerDao {
 	
 	CustomerPojo creatingAccount(CustomerPojo customerPojo);
 
+	CustomerPojo customerLogin(CustomerPojo customerPojo);
 }

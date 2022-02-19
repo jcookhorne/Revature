@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -25,6 +26,35 @@ public class CustomerDaoImpl implements CustomerDao {
 			e.printStackTrace();
 		}
 		return customerPojo;
+	}
+	
+	
+	
+	@Override
+	public CustomerPojo customerLogin(CustomerPojo customerPojo) {
+		// TODO Auto-generated method stub
+	Connection conn = DBUtil.getConnected();
+		
+
+		try {
+			Statement st = conn.createStatement();
+			String query = "SELECT * FROM employee_details WHERE username= '" + customerPojo.getCustomerUserName() 
+			+ "'AND password='" + customerPojo.getCustomerPassword()+ "'";
+			ResultSet rs =st.executeQuery(query);
+			if(rs.next()) {
+				System.out.println("You have logged in thank you");
+				customerPojo.setCheck(true);
+			}else {
+				customerPojo.setCheck(false);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	public CustomerPojo allAccountInformation(CustomerPojo custoemrPojo) {
@@ -79,6 +109,8 @@ public class CustomerDaoImpl implements CustomerDao {
 
 		return null;
 	}
+
+	
 
 	// step 3 - create a statement and execute it
 

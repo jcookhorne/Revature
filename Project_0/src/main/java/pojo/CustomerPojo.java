@@ -1,6 +1,7 @@
 package pojo;
 
 public class CustomerPojo {
+	private int customerId; // link to account customer id
 	private String customerFirstName;
 	private String customerLastName;
 	private String customerAddress;
@@ -9,8 +10,7 @@ public class CustomerPojo {
 	private String customerEmail;
 	private String customerPhoneNumber;
 	private String customerSocial;
-	private int customerId; // link to account customer id
-
+	private boolean check;
 	AccountPojo account = new AccountPojo();
 
 	public CustomerPojo() {
@@ -103,6 +103,14 @@ public class CustomerPojo {
 
 	public void setCustomerSocial(String customerSocial) {
 		this.customerSocial = customerSocial;
+	}
+
+	public boolean isCheck() {
+		return check;
+	}
+
+	public void setCheck(boolean check) {
+		this.check = check;
 	}
 
 }

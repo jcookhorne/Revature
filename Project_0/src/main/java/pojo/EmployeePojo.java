@@ -4,10 +4,11 @@ public class EmployeePojo {
 	private int employeeId;
 	private String employeeFirstName;
 	private String employeeLastName;
-	private int employeePhoneNumber;
+	private String employeePhoneNumber;
 	private String employeeUserName;
 	private String employeePassword;
-	private int customerPendingId;
+	private boolean check;
+	
 	
 	public EmployeePojo() {
 		super();
@@ -18,7 +19,7 @@ public class EmployeePojo {
 	
 
 	public EmployeePojo(int employeeId, String employeeFirstName, String employeeLastName,
-			int employeePhoneNumber, String employeeUserName, String employeePassword) {
+			String employeePhoneNumber, String employeeUserName, String employeePassword) {
 		super();
 		this.employeeId = employeeId;
 		this.employeeFirstName = employeeFirstName;
@@ -56,11 +57,11 @@ public class EmployeePojo {
 		this.employeeId = employeeId;
 	}
 
-	public int getEmployeeNumber() {
+	public String getEmployeeNumber() {
 		return employeePhoneNumber;
 	}
 
-	public void setEmployeeNumber(int employeeNumber) {
+	public void setEmployeeNumber(String employeeNumber) {
 		this.employeePhoneNumber = employeeNumber;
 	}
 
@@ -95,15 +96,15 @@ public class EmployeePojo {
 
 
 
-	public int getCustomerPendingId() {
-		return customerPendingId;
+	public boolean isCheck() {
+		return check;
 	}
 
 
 
 
-	public void setCustomerPendingId(int customerPendingId) {
-		this.customerPendingId = customerPendingId;
+	public void setCheck(boolean check) {
+		this.check = check;
 	}
 
 }
