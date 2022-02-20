@@ -41,7 +41,7 @@ public class CustomerDaoImpl implements CustomerDao {
 			+ "'AND password='" + customerPojo.getCustomerPassword()+ "'";
 			ResultSet rs =st.executeQuery(query);
 			if(rs.next()) {
-				System.out.println("You have logged in thank you");
+				
 				customerPojo.setCheck(true);
 			}else {
 				customerPojo.setCheck(false);

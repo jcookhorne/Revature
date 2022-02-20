@@ -185,8 +185,9 @@ public class BankMain {
 					System.out.println("Password : ");
 					login.setCustomerPassword(sc.nextLine());
 					customerService.customerLogin(login);
-			
+					
 					if (login.isCheck() == true) {
+						System.out.println("You have logged in thank you");
 						System.out.println("What would you like to do? ");
 						// when registering it needs to list all pending and there id number
 						System.out.println("What would you like to do? ");
