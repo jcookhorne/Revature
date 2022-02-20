@@ -7,15 +7,15 @@ import pojo.CustomerPojo;
 public class CustomerServiceImpl implements CustomerService{
 	
 	CustomerDao customerDao;
-	
+
+	public CustomerServiceImpl() {
+		customerDao = new CustomerDaoImpl();
+	}
+
 	@Override
 	public CustomerPojo customerLogin(CustomerPojo customerPojo) {
 		// TODO Auto-generated method stub
 		return customerDao.customerLogin(customerPojo);
-	}
-
-	public CustomerServiceImpl() {
-		customerDao = new CustomerDaoImpl();
 	}
 
 	public CustomerPojo allAccountInformation(CustomerPojo custoemrPojo) {
@@ -26,16 +26,6 @@ public class CustomerServiceImpl implements CustomerService{
 	public CustomerPojo accountDetail(int customerId) {
 		// TODO Auto-generated method stub
 		return customerDao.accountDetail( customerId);
-	}
-
-	public CustomerPojo transfer(int customerId) {
-		// TODO Auto-generated method stub
-		return customerDao.transfer(customerId);
-	}
-
-	public CustomerPojo transactionHistory(int customerId) {
-		// TODO Auto-generated method stub
-		return customerDao.transactionHistory(customerId);
 	}
 
 	public CustomerPojo creatingAccount(CustomerPojo customerPojo) {

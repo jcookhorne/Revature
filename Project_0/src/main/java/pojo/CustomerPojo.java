@@ -2,6 +2,7 @@ package pojo;
 
 public class CustomerPojo {
 	private int customerId; // link to account customer id
+	//information about customer
 	private String customerFirstName;
 	private String customerLastName;
 	private String customerAddress;
@@ -10,28 +11,38 @@ public class CustomerPojo {
 	private String customerEmail;
 	private String customerPhoneNumber;
 	private String customerSocial;
+	//balance that will enter account
+	private int startingBalance;
+	// check system for well anything/everything
 	private boolean check;
-	AccountPojo account = new AccountPojo();
+	
 
 	public CustomerPojo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public CustomerPojo(int customerId, String customerFirstName, String customerLastName, String customerAddress,
-			String customerUserName, String customerPassword, String customerEmail, String customerPhoneNumber,
-			String customerSocial) {
+			String customerEmail, String customerPhoneNumber,
+			String customerSocial, int startingBalance) {
+		
+		
 		this.customerId = customerId;
 		this.customerFirstName = customerFirstName;
 		this.customerLastName = customerLastName;
 		this.customerAddress = customerAddress;
-		this.customerUserName = customerUserName;
-		this.customerPassword = customerPassword;
 		this.customerEmail = customerEmail;
 		this.customerPhoneNumber = customerPhoneNumber;
 		this.customerSocial = customerSocial;
-
+		this.startingBalance = startingBalance;
 	}
+	
+	public CustomerPojo(String customerUserName, String customerPassword) {
+		super();
+		this.customerUserName = customerUserName;
+		this.customerPassword = customerPassword;
+	}
+
 
 	public int getCustomerId() {
 		return customerId;
@@ -105,6 +116,16 @@ public class CustomerPojo {
 		this.customerSocial = customerSocial;
 	}
 
+	public int getStartingBalance() {
+		return startingBalance;
+	}
+
+
+	public void setStartingBalance(int startingBalance) {
+		this.startingBalance = startingBalance;
+	}
+
+
 	public boolean isCheck() {
 		return check;
 	}
@@ -113,4 +134,19 @@ public class CustomerPojo {
 		this.check = check;
 	}
 
+
+	@Override
+	public String toString() {
+		return "CustomerPojo [customerId=" + customerId + ", customerFirstName=" + customerFirstName
+				+ ", customerLastName=" + customerLastName + ", customerAddress=" + customerAddress
+				+ ", customerEmail=" + customerEmail + ", customerPhoneNumber=" + customerPhoneNumber
+				+ ", customerSocial=" + customerSocial + ", startingBalance=" + startingBalance + "]";
+	}
+
+
+	
+	
+	
+	
+	
 }

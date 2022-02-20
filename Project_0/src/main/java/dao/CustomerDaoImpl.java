@@ -15,12 +15,11 @@ public class CustomerDaoImpl implements CustomerDao {
 		try {
 			Statement st = conn.createStatement();
 			System.out.println(customerPojo.getCustomerFirstName());
-			String query = "INSERT INTO customer_pending(first_name, last_name, address, email, phone_number, social_security) VALUES('"+customerPojo.getCustomerFirstName()+
+			String query = "INSERT INTO customer_pending(first_name, last_name, address, email, phone_number, social_security, start_balance) VALUES('"+customerPojo.getCustomerFirstName()+
 					"','" +customerPojo.getCustomerLastName()+"','" +customerPojo.getCustomerAddress()+
 					"','" +customerPojo.getCustomerEmail()+"','" +customerPojo.getCustomerPhoneNumber()+
-					"','"+customerPojo.getCustomerSocial()+"')";
+					"','"+customerPojo.getCustomerSocial()+"'," +customerPojo.getStartingBalance()+")";
 			int rows = st.executeUpdate(query);
-			System.out.println(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -72,32 +71,6 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	public CustomerPojo accountDetail(int customerId) {
-		Connection conn = DBUtil.getConnected();
-
-		try {
-			Statement st = conn.createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-
-	public CustomerPojo transfer(int customerId) {
-		Connection conn = DBUtil.getConnected();
-
-		try {
-			Statement st = conn.createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-
-	public CustomerPojo transactionHistory(int customerId) {
 		Connection conn = DBUtil.getConnected();
 
 		try {

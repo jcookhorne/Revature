@@ -7,10 +7,6 @@ public interface CustomerService {
 
 	CustomerPojo accountDetail(int customerId);
 
-	CustomerPojo transfer(int customerId);
-
-	CustomerPojo transactionHistory(int customerId);
-
 	CustomerPojo creatingAccount(CustomerPojo customerPojo);
 
 	CustomerPojo customerLogin(CustomerPojo customerPojo);

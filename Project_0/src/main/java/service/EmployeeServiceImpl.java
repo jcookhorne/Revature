@@ -8,40 +8,40 @@ import pojo.CustomerPojo;
 import pojo.EmployeePojo;
 
 public class EmployeeServiceImpl implements EmployeeService {
-	EmployeeDao employeedao;
+	EmployeeDao employeeDao;
 	
 	public EmployeeServiceImpl() {
-		employeedao = new EmployeeDaoImpl();
+		employeeDao = new EmployeeDaoImpl();
 	}
 	
 	@Override
 	public EmployeePojo employeeLogin(EmployeePojo employeePojo) {
 		// TODO Auto-generated method stub
-		return employeedao.employeeLogin(employeePojo);
+		return employeeDao.employeeLogin(employeePojo);
 	}
 	
 	@Override
 	public CustomerPojo customerRegistration(CustomerPojo customerPojo) {
 		// TODO Auto-generated method stub
-		return null;
+		return employeeDao.customerRegistration(customerPojo);
 	}
 
 	@Override
 	public EmployeePojo employeeInformation(EmployeePojo employeePojo) {
 		// TODO Auto-generated method stub
-		return null;
+		return employeeDao.employeeInformation(employeePojo);
 	}
 
 	@Override
 	public List<CustomerPojo> displayAllCustomers() {
 		// TODO Auto-generated method stub
-		return null;
+		return employeeDao.displayAllCustomers();
 	}
 
 	@Override
 	public List<CustomerPojo> customersPending() {
 		// TODO Auto-generated method stub
-		return null;
+		return employeeDao.customersPending();
 	}
 
 	
