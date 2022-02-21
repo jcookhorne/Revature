@@ -6,7 +6,7 @@ public class CustomerPojo {
 	private String customerFirstName;
 	private String customerLastName;
 	private String customerAddress;
-	private String customerUserName; // made not by the customer but by the worker
+	private String customerUsername; // made not by the customer but by the worker
 	private String customerPassword; // made not by the customer but by the worker
 	private String customerEmail;
 	private String customerPhoneNumber;
@@ -21,12 +21,10 @@ public class CustomerPojo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+	//constructor for entering information for customer pending
 	public CustomerPojo(int customerId, String customerFirstName, String customerLastName, String customerAddress,
 			String customerEmail, String customerPhoneNumber,
 			String customerSocial, int startingBalance) {
-		
-		
 		this.customerId = customerId;
 		this.customerFirstName = customerFirstName;
 		this.customerLastName = customerLastName;
@@ -36,10 +34,18 @@ public class CustomerPojo {
 		this.customerSocial = customerSocial;
 		this.startingBalance = startingBalance;
 	}
-	
-	public CustomerPojo(String customerUserName, String customerPassword) {
-		super();
-		this.customerUserName = customerUserName;
+	//Overriding constructor for information on customer details
+	public CustomerPojo(int customerId, String customerFirstName, String customerLastName, String customerAddress,
+			String customerEmail, String customerPhoneNumber,
+			String customerSocial, String customerUsername, String customerPassword) {
+		this.customerId = customerId;
+		this.customerFirstName = customerFirstName;
+		this.customerLastName = customerLastName;
+		this.customerAddress = customerAddress;
+		this.customerEmail = customerEmail;
+		this.customerPhoneNumber = customerPhoneNumber;
+		this.customerSocial = customerSocial;
+		this.customerUsername = customerUsername;
 		this.customerPassword = customerPassword;
 	}
 
@@ -76,12 +82,12 @@ public class CustomerPojo {
 		this.customerAddress = customerAddress;
 	}
 
-	public String getCustomerUserName() {
-		return customerUserName;
+	public String getCustomerUsername() {
+		return customerUsername;
 	}
 
-	public void setCustomerUserName(String customerUserName) {
-		this.customerUserName = customerUserName;
+	public void setCustomerUserName(String customerUsername) {
+		this.customerUsername = customerUsername;
 	}
 
 	public String getCustomerPassword() {
@@ -142,6 +148,7 @@ public class CustomerPojo {
 				+ ", customerEmail=" + customerEmail + ", customerPhoneNumber=" + customerPhoneNumber
 				+ ", customerSocial=" + customerSocial + ", startingBalance=" + startingBalance + "]";
 	}
+
 
 
 	

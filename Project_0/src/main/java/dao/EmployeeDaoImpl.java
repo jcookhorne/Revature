@@ -84,7 +84,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				}
 				// using new customerId as the key to update table and add in employee
 				// set up username and password for current customer
-				String query3 = "UPDATE customer_details SET username='" + customerPojo.getCustomerUserName()
+				String query3 = "UPDATE customer_details SET username='" + customerPojo.getCustomerUsername()
 						+ "'WHERE customer_id="+ customerPojo.getCustomerId();
 				int rows3 = st.executeUpdate(query3);
 				String queryPass = "UPDATE customer_details SET password='" + customerPojo.getCustomerPassword()
@@ -141,14 +141,26 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	public List<CustomerPojo> displayAllCustomers() {
 		Connection conn = DBUtil.getConnected();
-
+		List<CustomerPojo> listCust = new ArrayList<CustomerPojo>();
+		
 		try {
 			Statement st = conn.createStatement();
+			String query  = "SELECT * FROM customer_details";
+			ResultSet rs = st.executeQuery(query);
+			while(rs.next()) {
+				CustomerPojo allcust = new CustomerPojo(rs.getInt(1),
+						rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), 
+						rs.getString(6), rs.getString(7), 
+						rs.getString(8), rs.getString(9));
+				
+				listCust.add(allcust);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return listCust;
 	}
 
 }

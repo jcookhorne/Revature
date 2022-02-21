@@ -5,6 +5,24 @@ public class TransactionPojo {
 	private int fromAccountId;
 	private int toAccountId;
 	private int transferAmount;
+	
+	
+	
+	
+	
+	
+
+	public TransactionPojo(int fromAccountId, int toAccountId, int transferAmount) {
+		super();
+		this.fromAccountId = fromAccountId;
+		this.toAccountId = toAccountId;
+		this.transferAmount = transferAmount;
+	}
+
+	public TransactionPojo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public int getFromAccountId() {
 		return fromAccountId;

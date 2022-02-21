@@ -37,7 +37,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 		try {
 			Statement st = conn.createStatement();
-			String query = "SELECT * FROM employee_details WHERE username= '" + customerPojo.getCustomerUserName() 
+			String query = "SELECT * FROM employee_details WHERE username= '" + customerPojo.getCustomerUsername() 
 			+ "'AND password='" + customerPojo.getCustomerPassword()+ "'";
 			ResultSet rs =st.executeQuery(query);
 			if(rs.next()) {

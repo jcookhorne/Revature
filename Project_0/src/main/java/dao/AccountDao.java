@@ -4,7 +4,7 @@ import pojo.AccountPojo;
 
 public interface AccountDao {
 	
-	AccountPojo transfer(String AccountName);
+	AccountPojo transfer(int AccountId);
 	
 	AccountPojo transcationHistory(AccountPojo accountPojo );
 	

@@ -7,6 +7,7 @@ import java.util.Scanner;
 import pojo.AccountPojo;
 import pojo.CustomerPojo;
 import pojo.EmployeePojo;
+import pojo.TransactionPojo;
 import service.AccountService;
 import service.AccountServiceImpl;
 import service.CustomerService;
@@ -52,9 +53,8 @@ public class BankMain {
 					System.out.println("What would you like to do? ");
 					// when registering it needs to list all pending and there id number
 					System.out.println("1. Register pending customers");
-					System.out.println("2. View a customers information");
-					System.out.println("3. view all customers");
-					System.out.println("4. Log out");
+					System.out.println("2. View all customers");
+					System.out.println("3. Log Out");
 					System.out.println("***********************************************************");
 					int choice = sc.nextInt();
 					sc.nextLine();
@@ -100,7 +100,7 @@ public class BankMain {
 						//it to the regulare customer table and giving the customer a user and password
 						System.out.println("Please give the user a Username for their account ");
 						register.setCustomerUserName(sc.nextLine());
-						System.out.println(register.getCustomerUserName());
+						System.out.println(register.getCustomerUsername());
 						System.out.println("Please give the user a Password for their account");
 						register.setCustomerUserName(sc.nextLine());
 						System.out.println("***********************************************************\n");
@@ -113,15 +113,24 @@ public class BankMain {
 						
 						employeeService.customerRegistration(register);
 					case 2:
-						//System.out.println("Choice 2");
+						//View all Customers information
+						System.out.println("All current customers");
+						List<CustomerPojo> allCust = employeeService.displayAllCustomers();
+						Iterator<CustomerPojo> itr2 = allCust.iterator();
+						while(itr2.hasNext()) {
+							CustomerPojo ac = itr2.next();
+							System.out.println("ID: "+ ac.getCustomerId()+ "First Name: "+ ac.getCustomerFirstName()+"Last Name: "+ ac.getCustomerLastName()+
+									"Address: "+ ac.getCustomerAddress()+"email: "+ ac.getCustomerEmail()+
+									"Phone Number: "+ ac.getCustomerPhoneNumber()+"Social: "+ ac.getCustomerSocial()+
+									"Username: "+ ac.getCustomerUsername()+"ID: "+ ac.getCustomerPassword());
+						}
+						System.out.println("Those are all of the current Customers");
 					case 3:
-					case 4:
-//						System.out.println("************************************");
-//						System.out.println("Exiting System....");
-//						System.out.println("Thankyou for using Book Management System");
-//						System.out.println("************************************");
-//		
-////						System.exit(0);
+						System.out.println("************************************");
+						System.out.println("Exiting System");
+						System.out.println("Thank you");
+						System.out.println("************************************");		
+						System.exit(0);
 
 					}
 					System.out.println("Do you want to continue working(y/n) : ");
@@ -187,6 +196,7 @@ public class BankMain {
 					customerService.customerLogin(login);
 					
 					if (login.isCheck() == true) {
+						AccountPojo account = new AccountPojo();
 						System.out.println("You have logged in thank you");
 						System.out.println("What would you like to do? ");
 						// when registering it needs to list all pending and there id number
@@ -200,15 +210,47 @@ public class BankMain {
 						sc.nextLine();
 						switch (choice) {
 						case 1:
+							// display information such as balance
+							System.out.println(account.getAccountName()+" information");
+							System.out.println("Balance: " );
+						
+							
 						case 2:
+							// Transfer money from either checking or savings to the other
+							System.out.println("Which account do you wanna transfer money from");
+							System.out.println("c: Checkings");
+							System.out.println("s: Savings");
+							char tran = sc.next().charAt(0);
+							if(tran == 'c') {
+								
+							}else if (tran =='s') {
+								
+							}
+							
+							
 						case 3:
+							//view the transaction history of the account with the date
+							TransactionPojo transhist =new TransactionPojo();
+							System.out.println("Which account do you want to see the transaction history of");
+							System.out.println("c: Checkings");
+							System.out.println("s: Savings");
+							
+							char hist = sc.next().charAt(0);
+							if(hist == 'c') {
+								
+								
+							}else if(hist == 's') {
+								
+							}
+							
 						case 4:
-//							System.out.println("************************************");
-//							System.out.println("Exiting System....");
-//							System.out.println("Thankyou for using Book Management System");
-//							System.out.println("************************************");
-//			
-//							System.exit(0);
+					
+							System.out.println("************************************");
+							System.out.println("Exiting System....");
+							System.out.println("Thank you!");
+							System.out.println("************************************");
+			
+							System.exit(0);
 
 						}
 

@@ -1,7 +1,7 @@
 package pojo;
 
 public class AccountPojo {
-	private int accoutId;
+	private int accountId;
 	private String accountName;
 	private String accountName2;
 	private int accountBalance;
@@ -12,9 +12,9 @@ public class AccountPojo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AccountPojo(int accoutId, String accountName, String accountName2, int accountBalance, int accountCustomerId) {
+	public AccountPojo(int accountId, String accountName, String accountName2, int accountBalance, int accountCustomerId) {
 		super();
-		this.accoutId = accoutId;
+		this.accountId = accountId;
 		this.accountName = accountName;
 		this.accountName = accountName2;
 		this.accountBalance = accountBalance;
@@ -23,11 +23,11 @@ public class AccountPojo {
 	}
 
 	public int getAccoutId() {
-		return accoutId;
+		return accountId;
 	}
 
-	public void setAccoutId(int accoutId) {
-		this.accoutId = accoutId;
+	public void setAccoutId(int accountId) {
+		this.accountId = accountId;
 	}
 
 	public String getAccountName() {

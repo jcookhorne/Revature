@@ -12,9 +12,9 @@ public class AccountServiceImpl implements AccountService {
 	
 	
 	@Override
-	public AccountPojo transfer(String AccountName) {
+	public AccountPojo transfer(int accountId) {
 		// TODO Auto-generated method stub
-		return accountDao.transfer(AccountName);
+		return accountDao.transfer(accountId);
 	}
 
 	@Override
@@ -22,5 +22,6 @@ public class AccountServiceImpl implements AccountService {
 		// TODO Auto-generated method stub
 		return accountDao.transcationHistory(accountPojo);
 	}
+
 
 }
