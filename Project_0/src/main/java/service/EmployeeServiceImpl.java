@@ -26,11 +26,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.customerRegistration(customerPojo);
 	}
 
-	@Override
-	public EmployeePojo employeeInformation(EmployeePojo employeePojo) {
-		// TODO Auto-generated method stub
-		return employeeDao.employeeInformation(employeePojo);
-	}
 
 	@Override
 	public List<CustomerPojo> displayAllCustomers() {
@@ -43,6 +38,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		// TODO Auto-generated method stub
 		return employeeDao.customersPending();
 	}
+
+
 
 	
 

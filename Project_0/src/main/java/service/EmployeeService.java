@@ -10,8 +10,6 @@ public interface EmployeeService {
 	// create Customer account
 	CustomerPojo customerRegistration(CustomerPojo customerPojo);
 
-	EmployeePojo employeeInformation(EmployeePojo employeePojo);
-
 	List<CustomerPojo> displayAllCustomers();
 
 	List<CustomerPojo> customersPending();

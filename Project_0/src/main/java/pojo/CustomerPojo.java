@@ -11,8 +11,7 @@ public class CustomerPojo {
 	private String customerEmail;
 	private String customerPhoneNumber;
 	private String customerSocial;
-	//balance that will enter account
-	private int startingBalance;
+
 	// check system for well anything/everything
 	private boolean check;
 	
@@ -24,7 +23,7 @@ public class CustomerPojo {
 	//constructor for entering information for customer pending
 	public CustomerPojo(int customerId, String customerFirstName, String customerLastName, String customerAddress,
 			String customerEmail, String customerPhoneNumber,
-			String customerSocial, int startingBalance) {
+			String customerSocial) {
 		this.customerId = customerId;
 		this.customerFirstName = customerFirstName;
 		this.customerLastName = customerLastName;
@@ -32,7 +31,7 @@ public class CustomerPojo {
 		this.customerEmail = customerEmail;
 		this.customerPhoneNumber = customerPhoneNumber;
 		this.customerSocial = customerSocial;
-		this.startingBalance = startingBalance;
+		
 	}
 	//Overriding constructor for information on customer details
 	public CustomerPojo(int customerId, String customerFirstName, String customerLastName, String customerAddress,
@@ -86,7 +85,7 @@ public class CustomerPojo {
 		return customerUsername;
 	}
 
-	public void setCustomerUserName(String customerUsername) {
+	public void setCustomerUsername(String customerUsername) {
 		this.customerUsername = customerUsername;
 	}
 
@@ -122,15 +121,6 @@ public class CustomerPojo {
 		this.customerSocial = customerSocial;
 	}
 
-	public int getStartingBalance() {
-		return startingBalance;
-	}
-
-
-	public void setStartingBalance(int startingBalance) {
-		this.startingBalance = startingBalance;
-	}
-
 
 	public boolean isCheck() {
 		return check;
@@ -146,7 +136,7 @@ public class CustomerPojo {
 		return "CustomerPojo [customerId=" + customerId + ", customerFirstName=" + customerFirstName
 				+ ", customerLastName=" + customerLastName + ", customerAddress=" + customerAddress
 				+ ", customerEmail=" + customerEmail + ", customerPhoneNumber=" + customerPhoneNumber
-				+ ", customerSocial=" + customerSocial + ", startingBalance=" + startingBalance + "]";
+				+ ", customerSocial=" + customerSocial +"]";
 	}
 
 

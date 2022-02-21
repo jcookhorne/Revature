@@ -24,4 +24,19 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 
+	@Override
+	public AccountPojo accountCreate(AccountPojo accountPojo) {
+		// TODO Auto-generated method stub
+		
+		return accountDao.accountCreate(accountPojo);
+	}
+
+
+	@Override
+	public AccountPojo accountInfo(int AccountId) {
+		// TODO Auto-generated method stub
+		return accountDao.accountInfo(AccountId);
+	}
+
+
 }

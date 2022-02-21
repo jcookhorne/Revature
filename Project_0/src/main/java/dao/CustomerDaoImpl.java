@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import pojo.AccountPojo;
 import pojo.CustomerPojo;
 
 public class CustomerDaoImpl implements CustomerDao {
@@ -14,11 +15,19 @@ public class CustomerDaoImpl implements CustomerDao {
 		
 		try {
 			Statement st = conn.createStatement();
-			System.out.println(customerPojo.getCustomerFirstName());
-			String query = "INSERT INTO customer_pending(first_name, last_name, address, email, phone_number, social_security, start_balance) VALUES('"+customerPojo.getCustomerFirstName()+
+			
+			AccountPojo account = new AccountPojo();
+			String queryBal ="Select start_balance FROM customer_pending WHERE customer_id=" + customerPojo.getCustomerId();
+			ResultSet rb = st.executeQuery(queryBal);
+			if(rb.next()) {
+				int newBal = rb.getInt(1);
+				account.setAccountBalance(newBal);
+			}
+			
+			String query = "INSERT INTO customer_pending(first_name, last_name, address, email, phone_number, social_security) VALUES('"+customerPojo.getCustomerFirstName()+
 					"','" +customerPojo.getCustomerLastName()+"','" +customerPojo.getCustomerAddress()+
 					"','" +customerPojo.getCustomerEmail()+"','" +customerPojo.getCustomerPhoneNumber()+
-					"','"+customerPojo.getCustomerSocial()+"'," +customerPojo.getStartingBalance()+")";
+					"','"+customerPojo.getCustomerSocial()+")";
 			int rows = st.executeUpdate(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -37,7 +46,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 		try {
 			Statement st = conn.createStatement();
-			String query = "SELECT * FROM employee_details WHERE username= '" + customerPojo.getCustomerUsername() 
+			String query = "SELECT * FROM customer_details WHERE username= '" + customerPojo.getCustomerUsername() 
 			+ "'AND password='" + customerPojo.getCustomerPassword()+ "'";
 			ResultSet rs =st.executeQuery(query);
 			if(rs.next()) {

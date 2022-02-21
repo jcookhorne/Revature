@@ -6,23 +6,36 @@ public class AccountPojo {
 	private String accountName2;
 	private int accountBalance;
 	private int accountCustomerId; // link to customer id
-
+	private String accountUsername;
+	private String accountPassword;
+	
+	
+	
+	
+	
+	
 	public AccountPojo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public AccountPojo(int accountId, String accountName, String accountName2, int accountBalance, int accountCustomerId) {
+
+
+	public AccountPojo(int accountId, String accountName, String accountName2, int accountBalance,
+			int accountCustomerId, String accountUsername, String accountPassword) {
 		super();
 		this.accountId = accountId;
 		this.accountName = accountName;
-		this.accountName = accountName2;
+		this.accountName2 = accountName2;
 		this.accountBalance = accountBalance;
 		this.accountCustomerId = accountCustomerId;
-
+		this.accountUsername = accountUsername;
+		this.accountPassword = accountPassword;
 	}
 
-	public int getAccoutId() {
+
+
+	public int getAccountId() {
 		return accountId;
 	}
 
@@ -61,5 +74,33 @@ public class AccountPojo {
 	public void setAccountCustomerId(int accountCustomerId) {
 		this.accountCustomerId = accountCustomerId;
 	}
+
+
+
+	public String getAccountUsername() {
+		return accountUsername;
+	}
+
+	public void setAccountUsername(String accountUsername) {
+		this.accountUsername = accountUsername;
+	}
+
+	public String getAccountPassword() {
+		return accountPassword;
+	}
+
+	public void setAccountPassword(String accountPassword) {
+		this.accountPassword = accountPassword;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "AccountPojo [accountName=" + accountName + ", accountName2=" + accountName2 + ", accountBalance="
+				+ accountBalance + "]";
+	}
+	
+	
 
 }
