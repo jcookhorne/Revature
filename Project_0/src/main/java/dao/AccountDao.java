@@ -6,10 +6,8 @@ public interface AccountDao {
 	
 	AccountPojo accountCreate(AccountPojo accountPojo);
 	
-	AccountPojo accountInfo(int AccountId);
+	AccountPojo accountInfo(AccountPojo accountpojo);
 	
-	AccountPojo transfer(int AccountId);
-	
-	AccountPojo transcationHistory(AccountPojo accountPojo );
+	AccountPojo accountLogin(AccountPojo accountPojo);
 	
 }

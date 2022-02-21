@@ -14,6 +14,8 @@ import service.CustomerService;
 import service.CustomerServiceImpl;
 import service.EmployeeService;
 import service.EmployeeServiceImpl;
+import service.TransactionService;
+import service.TransactionServiceImpl;
 
 public class BankMain {
 
@@ -23,7 +25,9 @@ public class BankMain {
 		CustomerService customerService = new CustomerServiceImpl();
 		EmployeeService employeeService = new EmployeeServiceImpl();
 		AccountService accountService = new AccountServiceImpl();
-		CustomerPojo customerPending = new CustomerPojo();
+		TransactionService transactionService = new TransactionServiceImpl();
+		AccountPojo login = new AccountPojo();
+		AccountPojo account = new AccountPojo();
 		Scanner sc = new Scanner(System.in);
 		// calling preLogin
 		int answer;
@@ -39,15 +43,15 @@ public class BankMain {
 			if (answer == 1) {
 				// Employee login window
 				
-				EmployeePojo login = new EmployeePojo();
+				EmployeePojo eLogin = new EmployeePojo();
 				System.out.println("Welcome Employee please login");
 				System.out.println("***********************************************************");
 				System.out.println("Username : ");
-				login.setEmployeeUserName(sc.nextLine());
+				eLogin.setEmployeeUserName(sc.nextLine());
 				System.out.println("Password : ");
-				login.setEmployeePassword(sc.nextLine());
+				eLogin.setEmployeePassword(sc.nextLine());
 
-				employeeService.employeeLogin(login);
+				employeeService.employeeLogin(eLogin);
 
 				while (login.isCheck() == true) {
 					System.out.println("You have logged in thank you");
@@ -67,7 +71,7 @@ public class BankMain {
 						List<CustomerPojo> pending = employeeService.customersPending();
 						Iterator<CustomerPojo> itr = pending.iterator();
 						CustomerPojo register = new CustomerPojo();
-						AccountPojo account = new AccountPojo();
+						
 						
 						
 						// print all pending customers
@@ -84,17 +88,19 @@ public class BankMain {
 						char app = sc.next().charAt(0);
 						if(app == 'a') {
 							System.out.println("Please enter the Id of the customer your approving");
+							register.setCheck(true);
 							register.setCustomerId(sc.nextInt());
 							sc.nextLine();
 							System.out.println("Please enter the starting balance of the account");
 							account.setAccountBalance(sc.nextInt());
 							sc.nextLine();
-							register.setCheck(true);
+							
 						}else if(app == 'd') {
 							System.out.println("Please enter the Id of the customer your denying");
+							register.setCheck(false);
 							register.setCustomerId(sc.nextInt());
 							sc.nextLine();
-							register.setCheck(false);
+							
 							break;
 						}else {
 							System.out.println("You have not entered an applicable choice");
@@ -105,10 +111,10 @@ public class BankMain {
 						System.out.println("***********************************************************");
 						//it to the regulare customer table and giving the customer a user and password
 						System.out.println("Please give the user a Username for their account ");
-						register.setCustomerUsername(sc.nextLine());
+						account.setAccountUsername(sc.nextLine());
 						
 						System.out.println("Please give the user a Password for their account");
-						register.setCustomerPassword(sc.nextLine());
+						account.setAccountPassword(sc.nextLine());
 						System.out.println("***********************************************************\n");
 						
 						System.out.println("What is the name of the first account: ");
@@ -129,8 +135,7 @@ public class BankMain {
 							CustomerPojo ac = itr2.next();
 							System.out.println("ID: "+ ac.getCustomerId()+ "  First Name: "+ ac.getCustomerFirstName()+"  Last Name: "+ ac.getCustomerLastName()+
 									"  Address: "+ ac.getCustomerAddress()+"  email: "+ ac.getCustomerEmail()+
-									"  Phone Number: "+ ac.getCustomerPhoneNumber()+"  Social: "+ ac.getCustomerSocial()+
-									"  Username: "+ ac.getCustomerUsername()+"  Password: "+ ac.getCustomerPassword());
+									"  Phone Number: "+ ac.getCustomerPhoneNumber()+"  Social: "+ ac.getCustomerSocial());
 						}
 						System.out.println("Those are all of the current Customers");
 						break;
@@ -169,6 +174,7 @@ public class BankMain {
 					// customer Account Creation
 					
 					System.out.println("************************************************************");
+					CustomerPojo customerPending = new CustomerPojo();
 					System.out.println(
 							"\nTo register for your account please enter the following information for review :");
 					System.out.println("First Name : ");
@@ -191,20 +197,23 @@ public class BankMain {
 
 				} else if (answer == 2) {
 					// Customer Login window
-					CustomerPojo login = new CustomerPojo();
+					
+					
 					System.out.println("Welcome please login");
 					System.out.println("Username : ");
-					login.setCustomerUsername(sc.nextLine());
+					login.setAccountUsername(sc.nextLine());
 					System.out.println("Password : ");
-					login.setCustomerPassword(sc.nextLine());
-					customerService.customerLogin(login);
+					login.setAccountPassword(sc.nextLine());
+					
+					
+					accountService.accountLogin(login);
+				
 					
 					if (login.isCheck() == true) {
-						AccountPojo account = new AccountPojo();
+						
 						System.out.println("You have logged in thank you");
 						System.out.println("What would you like to do? ");
 						// when registering it needs to list all pending and there id number
-						System.out.println("What would you like to do? ");
 						System.out.println("1. Account details");
 						System.out.println("2. Transfer money");
 						System.out.println("3. View Transaction History");
@@ -216,20 +225,32 @@ public class BankMain {
 						case 1:
 							// display information such as balance
 							//accountService.accountInfo(account.getAccountId());
-							System.out.println(login.getCustomerUsername());
 							
+							account.setAccountUsername(login.getAccountUsername());
+							account.setAccountPassword(login.getAccountPassword());
+				
+							accountService.accountInfo(account);
+						
 							System.out.println(account.getAccountName()+" information");
 							System.out.println("Balance: " + account.getAccountBalance());
-							
-							
+							System.out.println(account.getAccountName2()+" information");
+							System.out.println("Balance: " + account.getAccountBalance2());
 							break;
 						case 2:
 							// Transfer money from either checking or savings to the other
+							TransactionPojo transfer = new TransactionPojo();
+							transactionService.transfer(transfer);
+							account.setAccountUsername(login.getAccountUsername());
+							account.setAccountPassword(login.getAccountPassword());
 							System.out.println("Which account do you wanna transfer money from");
-							System.out.println("c: Checkings");
-							System.out.println("s: Savings");
-							char tran = sc.next().charAt(0);
-							if(tran == 'c') {
+							System.out.println("1: " + account.getAccountUsername());
+							System.out.println("2: " + account.getAccountName2());
+							int tran = sc.next().charAt(0);
+							if(tran == 1) {
+								account.getAccountId();
+								
+								System.out.println("How much money do you want to transfer from you Checkings to Savings");
+								
 								
 							}else if (tran =='s') {
 								
@@ -238,16 +259,16 @@ public class BankMain {
 							break;
 						case 3:
 							//view the transaction history of the account with the date
-							TransactionPojo transhist =new TransactionPojo();
+							TransactionPojo hist =new TransactionPojo();
 							System.out.println("Which account do you want to see the transaction history of");
-							System.out.println("c: Checkings");
-							System.out.println("s: Savings");
-							
-							char hist = sc.next().charAt(0);
-							if(hist == 'c') {
+							System.out.println("1: " + account.getAccountName());
+							System.out.println("2: " + account.getAccountName2());
+							//transferService 
+							int tHist = sc.next().charAt(0);
+							if(tHist == 1) {
 								
 								
-							}else if(hist == 's') {
+							}else if(tHist == 2) {
 								
 							}
 							break;

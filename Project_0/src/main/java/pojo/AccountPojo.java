@@ -5,11 +5,12 @@ public class AccountPojo {
 	private String accountName;
 	private String accountName2;
 	private int accountBalance;
+	private int accountBalance2;
 	private int accountCustomerId; // link to customer id
 	private String accountUsername;
 	private String accountPassword;
 	
-	
+	private boolean Check;
 	
 	
 	
@@ -67,6 +68,19 @@ public class AccountPojo {
 		this.accountBalance = accountBalance;
 	}
 
+
+	public int getAccountBalance2() {
+		return accountBalance2;
+	}
+
+
+
+	public void setAccountBalance2(int accountBalance2) {
+		this.accountBalance2 = accountBalance2;
+	}
+
+
+
 	public int getAccountCustomerId() {
 		return accountCustomerId;
 	}
@@ -95,11 +109,19 @@ public class AccountPojo {
 
 
 
-	@Override
-	public String toString() {
-		return "AccountPojo [accountName=" + accountName + ", accountName2=" + accountName2 + ", accountBalance="
-				+ accountBalance + "]";
+	public boolean isCheck() {
+		return Check;
 	}
+
+
+
+	public void setCheck(boolean check) {
+		Check = check;
+	}
+
+
+
+	
 	
 	
 

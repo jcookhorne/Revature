@@ -6,10 +6,9 @@ public interface AccountService {
 	
 	AccountPojo accountCreate(AccountPojo accountPojo);
 	
-	AccountPojo accountInfo(int AccountId);
+	AccountPojo accountInfo(AccountPojo accountPojo);
 	
-	AccountPojo transfer(int accountId);
-
-	AccountPojo transcationHistory(AccountPojo accountPojo);
+	
+	AccountPojo accountLogin(AccountPojo accountPojo);
 
 }

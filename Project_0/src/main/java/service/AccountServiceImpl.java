@@ -12,19 +12,6 @@ public class AccountServiceImpl implements AccountService {
 	
 	
 	@Override
-	public AccountPojo transfer(int accountId) {
-		// TODO Auto-generated method stub
-		return accountDao.transfer(accountId);
-	}
-
-	@Override
-	public AccountPojo transcationHistory(AccountPojo accountPojo) {
-		// TODO Auto-generated method stub
-		return accountDao.transcationHistory(accountPojo);
-	}
-
-
-	@Override
 	public AccountPojo accountCreate(AccountPojo accountPojo) {
 		// TODO Auto-generated method stub
 		
@@ -33,9 +20,16 @@ public class AccountServiceImpl implements AccountService {
 
 
 	@Override
-	public AccountPojo accountInfo(int AccountId) {
+	public AccountPojo accountInfo(AccountPojo accountPojo) {
 		// TODO Auto-generated method stub
-		return accountDao.accountInfo(AccountId);
+		return accountDao.accountInfo(accountPojo);
+	}
+
+
+	@Override
+	public AccountPojo accountLogin(AccountPojo accountPojo) {
+		// TODO Auto-generated method stub
+		return accountDao.accountLogin(accountPojo);
 	}
 
 

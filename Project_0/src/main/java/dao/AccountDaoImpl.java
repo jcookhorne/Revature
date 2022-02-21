@@ -6,43 +6,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import pojo.AccountPojo;
-import pojo.CustomerPojo;
+
 
 public class AccountDaoImpl implements AccountDao {
 
-	@Override
-	public AccountPojo transfer(int AccountId) {
-		// TODO Auto-generated method stub
-		Connection conn = DBUtil.getConnected();
-
-		try {
-			Statement st = conn.createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public AccountPojo transcationHistory(AccountPojo accountPojo) {
-		// TODO Auto-generated method stub
-		Connection conn = DBUtil.getConnected();
-
-		try {
-			Statement st = conn.createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
 
 	@Override
 	public AccountPojo accountCreate(AccountPojo accountPojo) {
 		// TODO Auto-generated method stub
 		Connection conn = DBUtil.getConnected();
-		CustomerPojo customerPojo = new CustomerPojo();
+		
 		try {
 			
 			Statement st = conn.createStatement();
@@ -52,25 +25,34 @@ public class AccountDaoImpl implements AccountDao {
 			if (rs.next()) {
 				int rows = rs.getInt("last_Id");
 			
-			customerPojo.setCustomerId(rows);
+			accountPojo.setAccountCustomerId(rows);
 			}
 			// creating first account for customer
 			String query = "INSERT INTO account_details(customer_id, account_name) VALUES("
-					+ customerPojo.getCustomerId()  + ",'" + accountPojo.getAccountName()+ "')";
+					+ accountPojo.getAccountCustomerId()  + ",'" + accountPojo.getAccountName()+ "')";
 			int rows2 = st.executeUpdate(query);
 			
 			
 			// Creating second account for customer
 			String query2 = "INSERT INTO account_details(customer_id, account_name) VALUES("
-					+ customerPojo.getCustomerId()  + ",'" + accountPojo.getAccountName2() + "')";
+					+ accountPojo.getAccountCustomerId()  + ",'" + accountPojo.getAccountName2() + "')";
 			int rows5 = st.executeUpdate(query2);
 			
 			
 			// Transferring starting balance
 			String query3 = "UPDATE account_details SET account_balance=" + accountPojo.getAccountBalance()
 					+ "WHERE account_name='" + accountPojo.getAccountName() + "' AND customer_id="
-					+ customerPojo.getCustomerId();
+					+ accountPojo.getAccountCustomerId();
 			int rows6 = st.executeUpdate(query3);
+			
+			
+			// Setting accounts username and password
+			String queryuser = "UPDATE account_details SET username='" + accountPojo.getAccountUsername()
+			+ "' WHERE customer_id="+ accountPojo.getAccountCustomerId();
+			int rows3 = st.executeUpdate(queryuser);
+			String queryPass = "UPDATE account_details SET password='" + accountPojo.getAccountPassword()
+			+ "' WHERE customer_id="+ accountPojo.getAccountCustomerId();
+			int rowP = st.executeUpdate(queryPass);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -81,12 +63,67 @@ public class AccountDaoImpl implements AccountDao {
 	}
 
 	@Override
-	public AccountPojo accountInfo(int AccountId) {
+	public AccountPojo accountInfo(AccountPojo accountPojo) {
 		// TODO Auto-generated method stub
 		Connection conn = DBUtil.getConnected();
-			String query = "SELECT account_name, account_balance FROM account_details ";
+		
 		try {
 			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("SELECT customer_id FROM account_details WHERE username='"+ accountPojo.getAccountUsername()
+			+ "'AND password='"+accountPojo.getAccountPassword()+"'");
+			if(rs.next()) {
+				int newID = rs.getInt(1);
+				accountPojo.setAccountCustomerId(newID);
+			}
+			String query = "SELECT MAX(account_id) FROM account_details  WHERE customer_id=" + accountPojo.getAccountCustomerId();
+			ResultSet rr = st.executeQuery(query);
+			if (rr.next()) {
+				int firstAccount = rr.getInt(1);
+				String acc1 = "SELECT account_name, account_balance FROM account_details WHERE account_id ="+firstAccount;
+				ResultSet rr2 =st.executeQuery(acc1);
+				if(rr2.next()) {
+					String name =rr2.getString(1);
+					accountPojo.setAccountName(name);
+					int bal = rr2.getInt(2);
+					accountPojo.setAccountBalance(bal);
+				
+				}
+			}
+			String query2 = "SELECT MIN(account_id) FROM account_details  WHERE customer_id=" + accountPojo.getAccountCustomerId();
+			ResultSet res = st.executeQuery(query2);
+			if (res.next()) {
+				int secAccount = res.getInt(1);
+				ResultSet res2 =st.executeQuery("SELECT account_name, account_balance FROM account_details WHERE account_id ="+secAccount);
+				if(res2.next()) {
+					String name =res2.getString(1);
+					accountPojo.setAccountName2(name);
+					int bal = res2.getInt(2);
+					accountPojo.setAccountBalance2(bal);			
+				}
+			}		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public AccountPojo accountLogin(AccountPojo accountPojo) {
+		// TODO Auto-generated method stub
+		Connection conn = DBUtil.getConnected();
+
+		try {
+			Statement st = conn.createStatement();
+			String query = "SELECT * FROM account_details WHERE username= '" + accountPojo.getAccountUsername()
+					+ "'AND password='" + accountPojo.getAccountPassword() + "'";
+			ResultSet rs = st.executeQuery(query);
+			if (rs.next()) {
+				accountPojo.setCheck(true);
+			} else {
+				accountPojo.setCheck(false);
+			}
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

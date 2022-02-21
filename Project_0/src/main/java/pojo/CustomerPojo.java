@@ -6,8 +6,6 @@ public class CustomerPojo {
 	private String customerFirstName;
 	private String customerLastName;
 	private String customerAddress;
-	private String customerUsername; // made not by the customer but by the worker
-	private String customerPassword; // made not by the customer but by the worker
 	private String customerEmail;
 	private String customerPhoneNumber;
 	private String customerSocial;
@@ -33,20 +31,7 @@ public class CustomerPojo {
 		this.customerSocial = customerSocial;
 		
 	}
-	//Overriding constructor for information on customer details
-	public CustomerPojo(int customerId, String customerFirstName, String customerLastName, String customerAddress,
-			String customerEmail, String customerPhoneNumber,
-			String customerSocial, String customerUsername, String customerPassword) {
-		this.customerId = customerId;
-		this.customerFirstName = customerFirstName;
-		this.customerLastName = customerLastName;
-		this.customerAddress = customerAddress;
-		this.customerEmail = customerEmail;
-		this.customerPhoneNumber = customerPhoneNumber;
-		this.customerSocial = customerSocial;
-		this.customerUsername = customerUsername;
-		this.customerPassword = customerPassword;
-	}
+
 
 
 	public int getCustomerId() {
@@ -79,22 +64,6 @@ public class CustomerPojo {
 
 	public void setCustomerAddress(String customerAddress) {
 		this.customerAddress = customerAddress;
-	}
-
-	public String getCustomerUsername() {
-		return customerUsername;
-	}
-
-	public void setCustomerUsername(String customerUsername) {
-		this.customerUsername = customerUsername;
-	}
-
-	public String getCustomerPassword() {
-		return customerPassword;
-	}
-
-	public void setCustomerPassword(String customerPassword) {
-		this.customerPassword = customerPassword;
 	}
 
 	public String getCustomerEmail() {
