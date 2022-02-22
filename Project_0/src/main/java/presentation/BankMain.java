@@ -4,6 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import exceptions.NothingPending;
+import exceptions.SystemException;
 import pojo.AccountPojo;
 import pojo.CustomerPojo;
 import pojo.EmployeePojo;
@@ -19,15 +24,19 @@ import service.TransactionServiceImpl;
 
 public class BankMain {
 
+	public static final Logger LOG = LogManager.getLogger(BankMain.class);
+
 	public static void main(String[] args) {
 		// Scanner class
-		// CustomerPojo customerPojo = new CustomerPojo();
+
 		CustomerService customerService = new CustomerServiceImpl();
 		EmployeeService employeeService = new EmployeeServiceImpl();
 		AccountService accountService = new AccountServiceImpl();
 		TransactionService transactionService = new TransactionServiceImpl();
 		AccountPojo login = new AccountPojo();
 		AccountPojo account = new AccountPojo();
+		CustomerPojo register = new CustomerPojo();
+		EmployeePojo eLogin = new EmployeePojo();
 		Scanner sc = new Scanner(System.in);
 		// calling preLogin
 		int answer;
@@ -38,55 +47,74 @@ public class BankMain {
 			System.out.println("1: for employee");
 			System.out.println("2: for customer");
 			answer = sc.nextInt();
-			System.out.println("***********************************************************");;
+			System.out.println("***********************************************************");
+			;
 			sc.nextLine();// being skipped by sc.nextInt???
 			if (answer == 1) {
 				// Employee login window
-				
-				EmployeePojo eLogin = new EmployeePojo();
+
 				System.out.println("Welcome Employee please login");
 				System.out.println("***********************************************************");
 				System.out.println("Username : ");
 				eLogin.setEmployeeUserName(sc.nextLine());
 				System.out.println("Password : ");
 				eLogin.setEmployeePassword(sc.nextLine());
+				try {
 
-				employeeService.employeeLogin(eLogin);
+					employeeService.employeeLogin(eLogin);
+				} catch (SystemException e) {
+					// TODO Auto-generated catch block
+					LOG.error(e);
+					System.out.println(e.getMessage());
+				}
 
-				while (login.isCheck() == true) {
+				while (eLogin.isCheck() == true) {
 					System.out.println("You have logged in thank you");
 					System.out.println("What would you like to do? ");
 					// when registering it needs to list all pending and there id number
 					System.out.println("1. Register pending customers");
 					System.out.println("2. View all customers");
-					System.out.println("3. Log Out");
+					System.out.println("3. Exit System");
 					System.out.println("***********************************************************");
 					int choice = sc.nextInt();
 					sc.nextLine();
 					switch (choice) {
 					case 1:
-						
+
 						System.out.println("Current pending customers");
 						System.out.println("***********************************************************");
-						List<CustomerPojo> pending = employeeService.customersPending();
-						Iterator<CustomerPojo> itr = pending.iterator();
-						CustomerPojo register = new CustomerPojo();
-						
-						
-						
-						// print all pending customers
-						while(itr.hasNext()) {
-							CustomerPojo cp = itr.next();
-							System.out.println("ID: "+cp.getCustomerId() +"\tFirst Name : "+ cp.getCustomerFirstName() +"\tLast Name : "+
-							cp.getCustomerLastName() +"\tAddress : "+ cp.getCustomerAddress() +"\tEmail : "+ cp.getCustomerEmail()+"\tPhone Number : "+
-							cp.getCustomerPhoneNumber() +"\tSocial Security : "+ cp.getCustomerSocial());
+						List<CustomerPojo> pending;
+						try {
+							pending = employeeService.customersPending();
+
+							Iterator<CustomerPojo> itr = pending.iterator();
+
+							// print all pending customers
+							while (itr.hasNext()) {
+								CustomerPojo cp = itr.next();
+								System.out.println("ID: " + cp.getCustomerId() + "\tFirst Name : "
+										+ cp.getCustomerFirstName() + "\tLast Name : " + cp.getCustomerLastName()
+										+ "\tAddress : " + cp.getCustomerAddress() + "\tEmail : "
+										+ cp.getCustomerEmail() + "\tPhone Number : " + cp.getCustomerPhoneNumber()
+										+ "\tSocial Security : " + cp.getCustomerSocial());
+
+							}
+
+						} catch (SystemException e) {
+							// TODO Auto-generated catch block
+							LOG.error(e);
+							System.out.println(e.getMessage());
+						} catch (NothingPending e) {
+							// TODO Auto-generated catch block
+							LOG.error(e);
+							System.out.println(e.getMessage());
 						}
-					
+
 						System.out.println("\nWould you like to approve or deny an account");
 						System.out.println("a: for approve.");
 						System.out.println("d: for deny");
 						char app = sc.next().charAt(0);
-						if(app == 'a') {
+						if (app == 'a') {
 							System.out.println("Please enter the Id of the customer your approving");
 							register.setCheck(true);
 							register.setCustomerId(sc.nextInt());
@@ -94,69 +122,105 @@ public class BankMain {
 							System.out.println("Please enter the starting balance of the account");
 							account.setAccountBalance(sc.nextInt());
 							sc.nextLine();
-							
-						}else if(app == 'd') {
+
+						} else if (app == 'd') {
 							System.out.println("Please enter the Id of the customer your denying");
 							register.setCheck(false);
 							register.setCustomerId(sc.nextInt());
 							sc.nextLine();
-							
+							try {
+								employeeService.customerRegistration(register);
+							} catch (SystemException e) {
+								// TODO Auto-generated catch block
+								LOG.error(e);
+								System.out.println(e.getMessage());
+							}
 							break;
-						}else {
+						} else {
 							System.out.println("You have not entered an applicable choice");
-							
+
 							break;
 						}
-						
+
 						System.out.println("***********************************************************");
-						//it to the regulare customer table and giving the customer a user and password
+						// it to the regulare customer table and giving the customer a user and password
 						System.out.println("Please give the user a Username for their account ");
 						account.setAccountUsername(sc.nextLine());
-						
+
 						System.out.println("Please give the user a Password for their account");
 						account.setAccountPassword(sc.nextLine());
 						System.out.println("***********************************************************\n");
-						
-						System.out.println("What is the name of the first account: ");
+
+						System.out.println("What is the name of the checkings account: ");
 						account.setAccountName(sc.nextLine());
-					
-						System.out.println("What is the name of the second account: ");
+
+						System.out.println("What is the name of the savings account: ");
 						account.setAccountName2(sc.nextLine());
-					
-						employeeService.customerRegistration(register);
-						accountService.accountCreate(account);
+
+						try {
+							employeeService.customerRegistration(register);
+						} catch (SystemException e) {
+							// TODO Auto-generated catch block
+							LOG.error(e);
+							System.out.println(e.getMessage());
+						}
+						try {
+							accountService.accountCreate(account);
+						} catch (SystemException e) {
+							// TODO Auto-generated catch block
+							LOG.error(e);
+							System.out.println(e.getMessage());
+						}
 						break;
 					case 2:
-						//View all Customers information
+						// View all Customers information
 						System.out.println("All current customers");
-						List<CustomerPojo> allCust = employeeService.displayAllCustomers();
-						Iterator<CustomerPojo> itr2 = allCust.iterator();
-						while(itr2.hasNext()) {
-							CustomerPojo ac = itr2.next();
-							System.out.println("ID: "+ ac.getCustomerId()+ "  First Name: "+ ac.getCustomerFirstName()+"  Last Name: "+ ac.getCustomerLastName()+
-									"  Address: "+ ac.getCustomerAddress()+"  email: "+ ac.getCustomerEmail()+
-									"  Phone Number: "+ ac.getCustomerPhoneNumber()+"  Social: "+ ac.getCustomerSocial());
+						List<CustomerPojo> allCust;
+						try {
+							allCust = employeeService.displayAllCustomers();
+							Iterator<CustomerPojo> itr2 = allCust.iterator();
+
+							while (itr2.hasNext()) {
+								CustomerPojo ac = itr2.next();
+								System.out.println("ID: " + ac.getCustomerId() + "  First Name: "
+										+ ac.getCustomerFirstName() + "  Last Name: " + ac.getCustomerLastName()
+										+ "  Address: " + ac.getCustomerAddress() + "  email: " + ac.getCustomerEmail()
+										+ "  Phone Number: " + ac.getCustomerPhoneNumber() + "  Social: "
+										+ ac.getCustomerSocial());
+							}
+							System.out.println("Those are all of the current Customers");
+						} catch (SystemException e) {
+							// TODO Auto-generated catch block
+							LOG.error(e);
+							System.out.println(e.getMessage());
 						}
-						System.out.println("Those are all of the current Customers");
+
 						break;
 					case 3:
 						System.out.println("************************************");
 						System.out.println("Exiting System");
 						System.out.println("Thank you");
-						System.out.println("************************************");		
+						System.out.println("************************************");
+						try {
+							employeeService.exitApplication();
+						} catch (SystemException e) {
+							// TODO Auto-generated catch block
+							LOG.error(e);
+							System.out.println(e.getMessage());
+						}
+
 						System.exit(0);
-						break;
+
 					}
-					
+
 					System.out.println("Do you want to continue working(y/n) : ");
-					char log = sc.next().charAt(0);
-					if (log != 'y') {
-						login.setCheck(false);
+					char l = sc.next().charAt(0);
+					if (l != 'y') {
+						eLogin.setCheck(false);
 						break;
 					}
-					
-				} 
-					
+
+				}
 
 			} else if (answer == 2) {
 
@@ -172,7 +236,7 @@ public class BankMain {
 				if (answer == 1) {
 
 					// customer Account Creation
-					
+
 					System.out.println("************************************************************");
 					CustomerPojo customerPending = new CustomerPojo();
 					System.out.println(
@@ -189,7 +253,13 @@ public class BankMain {
 					customerPending.setCustomerPhoneNumber(sc.nextLine());
 					System.out.println("Social Security Number : ");
 					customerPending.setCustomerSocial(sc.nextLine());
-					customerService.creatingAccount(customerPending);
+					try {
+						customerService.creatingAccount(customerPending);
+					} catch (SystemException e) {
+						// TODO Auto-generated catch block
+						LOG.error(e);
+						System.out.println(e.getMessage());
+					}
 
 					System.out.println("\nThank you, please wait for your acount to be under review!");
 
@@ -197,99 +267,139 @@ public class BankMain {
 
 				} else if (answer == 2) {
 					// Customer Login window
-					
-					
+
 					System.out.println("Welcome please login");
 					System.out.println("Username : ");
 					login.setAccountUsername(sc.nextLine());
 					System.out.println("Password : ");
 					login.setAccountPassword(sc.nextLine());
-					
-					
-					accountService.accountLogin(login);
-				
-					
+
+					try {
+						accountService.accountLogin(login);
+					} catch (SystemException e) {
+						// TODO Auto-generated catch block
+						LOG.error(e);
+						System.out.println(e.getMessage());
+					}
+					while (login.isCheck() == true) {
 					if (login.isCheck() == true) {
-						
+
 						System.out.println("You have logged in thank you");
 						System.out.println("What would you like to do? ");
 						// when registering it needs to list all pending and there id number
 						System.out.println("1. Account details");
 						System.out.println("2. Transfer money");
 						System.out.println("3. View Transaction History");
-						System.out.println("4. Log out");
+						System.out.println("4. Exit system");
 						System.out.println("******************************************************");
 						int choice = sc.nextInt();
 						sc.nextLine();
 						switch (choice) {
 						case 1:
 							// display information such as balance
-							//accountService.accountInfo(account.getAccountId());
-							
+							// accountService.accountInfo(account.getAccountId());
+
 							account.setAccountUsername(login.getAccountUsername());
 							account.setAccountPassword(login.getAccountPassword());
-				
-							accountService.accountInfo(account);
-						
-							System.out.println(account.getAccountName()+" information");
+
+							try {
+								accountService.accountInfo(account);
+							} catch (SystemException e) {
+								// TODO Auto-generated catch block
+								LOG.error(e);
+								System.out.println(e.getMessage());
+							}
+
+							System.out.println(account.getAccountName() + " information");
 							System.out.println("Balance: " + account.getAccountBalance());
-							System.out.println(account.getAccountName2()+" information");
+							System.out.println(account.getAccountName2() + " information");
 							System.out.println("Balance: " + account.getAccountBalance2());
 							break;
 						case 2:
 							// Transfer money from either checking or savings to the other
-							TransactionPojo transfer = new TransactionPojo();
-							transactionService.transfer(transfer);
-							account.setAccountUsername(login.getAccountUsername());
-							account.setAccountPassword(login.getAccountPassword());
+							TransactionPojo transaction = new TransactionPojo();
+
+							transaction.setTranUsername(login.getAccountUsername());
+							transaction.setTranPassword(login.getAccountPassword());
 							System.out.println("Which account do you wanna transfer money from");
-							System.out.println("1: " + account.getAccountUsername());
-							System.out.println("2: " + account.getAccountName2());
-							int tran = sc.next().charAt(0);
-							if(tran == 1) {
-								account.getAccountId();
-								
+							System.out.println("1: Checkings");
+							System.out.println("2: Savings");
+							int tran = sc.nextInt();
+							sc.nextLine();
+							if (tran == 1) {
+								transaction.setCheck(false);
 								System.out.println("How much money do you want to transfer from you Checkings to Savings");
+								transaction.setTransferAmount(sc.nextInt());
+								try {
+									transactionService.transfer(transaction);
+								} catch (SystemException e) {
+									// TODO Auto-generated catch block
+									LOG.error(e);
+									System.out.println(e.getMessage());
+								}
+								break;
+							} else if (tran == 2) {
+								transaction.setCheck(true);
+								System.out.println("How much money do you want to transfer from you Checkings to Savings");
+								transaction.setTransferAmount(sc.nextInt());
 								
 								
-							}else if (tran =='s') {
 								
+								
+
+								try {
+									transactionService.transfer(transaction);
+								} catch (SystemException e) {
+									// TODO Auto-generated catch block
+									LOG.error(e);
+									System.out.println(e.getMessage());
+								}
+								break;
 							}
-							
 							break;
 						case 3:
-							//view the transaction history of the account with the date
-							TransactionPojo hist =new TransactionPojo();
+							// view the transaction history of the account with the date
+							TransactionPojo hist = new TransactionPojo();
 							System.out.println("Which account do you want to see the transaction history of");
 							System.out.println("1: " + account.getAccountName());
 							System.out.println("2: " + account.getAccountName2());
-							//transferService 
+							// transferService
 							int tHist = sc.next().charAt(0);
-							if(tHist == 1) {
-								
-								
-							}else if(tHist == 2) {
-								
+							if (tHist == 1) {
+
+							} else if (tHist == 2) {
+
 							}
 							break;
 						case 4:
-					
+
 							System.out.println("************************************");
 							System.out.println("Exiting System....");
 							System.out.println("Thank you!");
 							System.out.println("************************************");
-			
+							try {
+								customerService.exitApplication();
+							} catch (SystemException e) {
+								// TODO Auto-generated catch block
+								LOG.error(e);
+								System.out.println(e.getMessage());
+							}
 							System.exit(0);
 
+						}
+						System.out.println("Do you want to continue working(y/n) : ");
+						char l = sc.next().charAt(0);
+						if (l != 'y') {
+							login.setCheck(false);
+							break;
 						}
 
 					} else {
 						System.out.println("incorrect login, please try again.");
 					}
 
-
 				}
-
+				}
 				// switch()
 
 			} else {

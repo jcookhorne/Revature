@@ -6,9 +6,16 @@ public class TransactionPojo {
 	private int toAccountId;
 	private int transferAmount;
 	private String date;
+	private String tranUsername;
+	private String tranPassword;
+	private boolean Check;
 	
 
-	
+	public TransactionPojo(String tranUsername, String tranPassword) {
+		super();
+		this.tranUsername = tranUsername;
+		this.tranPassword = tranPassword;
+	}
 
 	public TransactionPojo(int transactionId, int fromAccountId, int toAccountId, 
 			int transferAmount, String date) {
@@ -62,6 +69,30 @@ public class TransactionPojo {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getTranUsername() {
+		return tranUsername;
+	}
+
+	public void setTranUsername(String tranUsername) {
+		this.tranUsername = tranUsername;
+	}
+
+	public String getTranPassword() {
+		return tranPassword;
+	}
+
+	public void setTranPassword(String tranPassword) {
+		this.tranPassword = tranPassword;
+	}
+
+	public boolean isCheck() {
+		return Check;
+	}
+
+	public void setCheck(boolean check) {
+		Check = check;
 	}
 
 }

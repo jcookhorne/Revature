@@ -1,22 +1,29 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import pojo.AccountPojo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import exceptions.NothingPending;
+import exceptions.SystemException;
 import pojo.CustomerPojo;
 import pojo.EmployeePojo;
 
 public class EmployeeDaoImpl implements EmployeeDao {
+	
+	public static final Logger LOG = LogManager.getLogger(EmployeeDaoImpl.class);
 
 	@Override
-	public EmployeePojo employeeLogin(EmployeePojo employeePojo) {
+	public EmployeePojo employeeLogin(EmployeePojo employeePojo)throws SystemException{
 		// TODO Auto-generated method stub
+		LOG.info("Entered employeeLogin() in EmployeeDAO");
 		Connection conn = DBUtil.getConnected();
 
 		try {
@@ -32,14 +39,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SystemException();
 		}
-
+		LOG.info("Exited employeeLogin() in EmployeeDAO");
 		return null;
 	}
 
-	public List<CustomerPojo> customersPending() {
+	public List<CustomerPojo> customersPending()throws SystemException, NothingPending {
 		// TODO Auto-generated method stub
+		LOG.info("Entered customersPending() in EmployeeDAO");
 		List<CustomerPojo> allPending = new ArrayList<CustomerPojo>();
 		Connection conn = DBUtil.getConnected();
 
@@ -56,14 +64,18 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SystemException();
 		}
+		if (allPending.isEmpty()) {
+			throw new NothingPending();
+		}
+		LOG.info("Exited customerPending() in EmployeeDAO");
 		return allPending;
 	}
 
-	public CustomerPojo customerRegistration(CustomerPojo customerPojo) {
+	public CustomerPojo customerRegistration(CustomerPojo customerPojo)throws SystemException {
 		Connection conn = DBUtil.getConnected();
-		
+		LOG.info("Entered customerRegistration() in EmployeeDAO");
 		// checking if its approve or deny
 		if (customerPojo.isCheck() == true) {
 			try {
@@ -74,8 +86,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 						+ "WHERE customer_id= " + customerPojo.getCustomerId();
 				int rows = st.executeUpdate(query);
 				
-//				String query2 = "DELETE FROM customer_pending WHERE customer_id= " + customerPojo.getCustomerId();
-//				int delete = st.executeUpdate(query2);
+				String query2 = "DELETE FROM customer_pending WHERE customer_id= " + customerPojo.getCustomerId();
+				int delete = st.executeUpdate(query2);
 				// creating new customerId that belongs to customer_details table
 				ResultSet rs = st.executeQuery("SELECT MAX(customer_id) AS last_Id FROM customer_details");
 				if (rs.next()) {
@@ -87,7 +99,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new SystemException();
 			}
 		} else if (customerPojo.isCheck() == false) {
 			// String query =
@@ -98,14 +110,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new SystemException();
 			}
 		}
+		LOG.info("Exited customerRegistration() in EmployeeDAO");
 		return null;
 	}
 
 
-	public List<CustomerPojo> displayAllCustomers() {
+	public List<CustomerPojo> displayAllCustomers()throws SystemException {
+		LOG.info("Entered displayAllCustomers() in EmployeeDAO");
 		Connection conn = DBUtil.getConnected();
 		List<CustomerPojo> listCust = new ArrayList<CustomerPojo>();
 		
@@ -123,7 +137,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SystemException();
 		}
 		return listCust;
 	}

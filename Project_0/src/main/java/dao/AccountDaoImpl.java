@@ -5,15 +5,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import exceptions.SystemException;
 import pojo.AccountPojo;
+import pojo.TransactionPojo;
 
 
 public class AccountDaoImpl implements AccountDao {
 
+	
+	public static final Logger LOG = LogManager.getLogger(AccountDaoImpl.class);
 
 	@Override
-	public AccountPojo accountCreate(AccountPojo accountPojo) {
+	public AccountPojo accountCreate(AccountPojo accountPojo)throws SystemException {
 		// TODO Auto-generated method stub
+		LOG.info("Entered accountCreate() in Account DAO");
 		Connection conn = DBUtil.getConnected();
 		
 		try {
@@ -56,15 +64,16 @@ public class AccountDaoImpl implements AccountDao {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SystemException();
 		}
-	
+		LOG.info("Exited accountCreate() in Account DAO");
 		return null;
 	}
 
 	@Override
-	public AccountPojo accountInfo(AccountPojo accountPojo) {
+	public AccountPojo accountInfo(AccountPojo accountPojo)throws SystemException{
 		// TODO Auto-generated method stub
+		LOG.info("Entered accountinfo() in Account DAO");
 		Connection conn = DBUtil.getConnected();
 		
 		try {
@@ -74,6 +83,8 @@ public class AccountDaoImpl implements AccountDao {
 			if(rs.next()) {
 				int newID = rs.getInt(1);
 				accountPojo.setAccountCustomerId(newID);
+				
+				
 			}
 			String query = "SELECT MAX(account_id) FROM account_details  WHERE customer_id=" + accountPojo.getAccountCustomerId();
 			ResultSet rr = st.executeQuery(query);
@@ -103,14 +114,16 @@ public class AccountDaoImpl implements AccountDao {
 			}		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SystemException();
 		}
+		LOG.info("Exited accountinfo() in Account DAO");
 		return null;
 	}
 
 	@Override
-	public AccountPojo accountLogin(AccountPojo accountPojo) {
+	public AccountPojo accountLogin(AccountPojo accountPojo)throws SystemException {
 		// TODO Auto-generated method stub
+		LOG.info("Entered accountlogin() in Account DAO");
 		Connection conn = DBUtil.getConnected();
 
 		try {
@@ -125,9 +138,11 @@ public class AccountDaoImpl implements AccountDao {
 			}
 
 		} catch (SQLException e) {
+			
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//throw new SystemException();
 		}
+		LOG.info("Exited accountlogin() in Account DAO");
 		return null;
 	}	
 

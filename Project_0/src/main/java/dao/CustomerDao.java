@@ -1,12 +1,15 @@
 package dao;
 
+import exceptions.SystemException;
 import pojo.CustomerPojo;
 
 public interface CustomerDao {
 	// read account info ( balance of accounts)
 
-
+	CustomerPojo creatingAccount(CustomerPojo customerPojo)throws SystemException;
 	
-	CustomerPojo creatingAccount(CustomerPojo customerPojo);
-
+	
+	default void exitApplication() throws SystemException{
+		DBUtil.closeConnection();
+	}
 }
