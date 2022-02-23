@@ -37,6 +37,8 @@ public class BankMain {
 		AccountPojo account = new AccountPojo();
 		CustomerPojo register = new CustomerPojo();
 		EmployeePojo eLogin = new EmployeePojo();
+		TransactionPojo transaction = new TransactionPojo();
+
 		Scanner sc = new Scanner(System.in);
 		// calling preLogin
 		int answer;
@@ -282,123 +284,133 @@ public class BankMain {
 						System.out.println(e.getMessage());
 					}
 					while (login.isCheck() == true) {
-					if (login.isCheck() == true) {
+						if (login.isCheck() == true) {
 
-						System.out.println("You have logged in thank you");
-						System.out.println("What would you like to do? ");
-						// when registering it needs to list all pending and there id number
-						System.out.println("1. Account details");
-						System.out.println("2. Transfer money");
-						System.out.println("3. View Transaction History");
-						System.out.println("4. Exit system");
-						System.out.println("******************************************************");
-						int choice = sc.nextInt();
-						sc.nextLine();
-						switch (choice) {
-						case 1:
-							// display information such as balance
-							// accountService.accountInfo(account.getAccountId());
-
-							account.setAccountUsername(login.getAccountUsername());
-							account.setAccountPassword(login.getAccountPassword());
-
-							try {
-								accountService.accountInfo(account);
-							} catch (SystemException e) {
-								// TODO Auto-generated catch block
-								LOG.error(e);
-								System.out.println(e.getMessage());
-							}
-
-							System.out.println(account.getAccountName() + " information");
-							System.out.println("Balance: " + account.getAccountBalance());
-							System.out.println(account.getAccountName2() + " information");
-							System.out.println("Balance: " + account.getAccountBalance2());
-							break;
-						case 2:
-							// Transfer money from either checking or savings to the other
-							TransactionPojo transaction = new TransactionPojo();
-
-							transaction.setTranUsername(login.getAccountUsername());
-							transaction.setTranPassword(login.getAccountPassword());
-							System.out.println("Which account do you wanna transfer money from");
-							System.out.println("1: Checkings");
-							System.out.println("2: Savings");
-							int tran = sc.nextInt();
+							System.out.println("You have logged in thank you");
+							System.out.println("What would you like to do? ");
+							// when registering it needs to list all pending and there id number
+							System.out.println("1. Account details");
+							System.out.println("2. Transfer money");
+							System.out.println("3. View Transaction History");
+							System.out.println("4. Exit system");
+							System.out.println("******************************************************");
+							int choice = sc.nextInt();
 							sc.nextLine();
-							if (tran == 1) {
-								transaction.setCheck(false);
-								System.out.println("How much money do you want to transfer from you Checkings to Savings");
-								transaction.setTransferAmount(sc.nextInt());
+							switch (choice) {
+							case 1:
+								// display information such as balance
+								// accountService.accountInfo(account.getAccountId());
+
+								account.setAccountUsername(login.getAccountUsername());
+								account.setAccountPassword(login.getAccountPassword());
+
 								try {
-									transactionService.transfer(transaction);
+									accountService.accountInfo(account);
 								} catch (SystemException e) {
 									// TODO Auto-generated catch block
 									LOG.error(e);
 									System.out.println(e.getMessage());
 								}
-								break;
-							} else if (tran == 2) {
-								transaction.setCheck(true);
-								System.out.println("How much money do you want to transfer from you Checkings to Savings");
-								transaction.setTransferAmount(sc.nextInt());
-								
-								
-								
-								
 
+								System.out.println(account.getAccountName() + " information");
+								System.out.println("Balance: " + account.getAccountBalance());
+								System.out.println(account.getAccountName2() + " information");
+								System.out.println("Balance: " + account.getAccountBalance2());
+								break;
+							case 2:
+								// Transfer money from either checking or savings to the other
+								
+								transaction.setTranUsername(login.getAccountUsername());
+								transaction.setTranPassword(login.getAccountPassword());
+								System.out.println("Which account do you wanna transfer money from");
+								System.out.println("1: Checkings");
+								System.out.println("2: Savings");
+								int tran = sc.nextInt();
+								sc.nextLine();
+								if (tran == 1) {
+									transaction.setCheck(false);
+									System.out.println(
+											"How much money do you want to transfer from you Checkings to Savings");
+									transaction.setTransferAmount(sc.nextInt());
+									System.out.println("Tranfer Complete.");
+
+									try {
+										transactionService.transfer(transaction);
+									} catch (SystemException e) {
+										// TODO Auto-generated catch block
+										LOG.error(e);
+										System.out.println(e.getMessage());
+									}
+									
+								} else if (tran == 2) {
+									transaction.setCheck(true);
+									System.out.println(
+											"How much money do you want to transfer from you Checkings to Savings");
+									transaction.setTransferAmount(sc.nextInt());
+
+									System.out.println("Tranfer Complete.");
+
+									try {
+										transactionService.transfer(transaction);
+									} catch (SystemException e) {
+										// TODO Auto-generated catch block
+										LOG.error(e);
+										System.out.println(e.getMessage());
+									}
+									
+								}
+								break;
+							case 3:
+								// view the transaction history of the account with the date
+								TransactionPojo hist = new TransactionPojo();
+								hist.setTranUsername(login.getAccountUsername());
+								hist.setTranPassword(login.getAccountPassword());
+								// transferService
+								List<TransactionPojo> history;
+								
 								try {
-									transactionService.transfer(transaction);
+									history = transactionService.transactionHistory(hist);
+									Iterator<TransactionPojo> itr = history.iterator();
+									while(itr.hasNext()) {
+										TransactionPojo tp = itr.next();
+										System.out.println("transaction id: " + tp.getTransaction_id() + " From Account Id: "+
+										tp.getFromAccountId()+ " To Account ID: " + tp.getToAccountId()+ " Tranfer Amount: "+
+												tp.getTransferAmount()+ " Date: " + tp.getDate());
+									}
+									System.out.println("Thats all of your transactions. ");
+								} catch (SystemException e1) {
+									LOG.error(e1);
+									System.out.println(e1.getMessage());
+								}
+								break;
+							case 4:
+
+								System.out.println("************************************");
+								System.out.println("Exiting System....");
+								System.out.println("Thank you!");
+								System.out.println("************************************");
+								try {
+									customerService.exitApplication();
 								} catch (SystemException e) {
 									// TODO Auto-generated catch block
 									LOG.error(e);
 									System.out.println(e.getMessage());
 								}
+								System.exit(0);
+
+							}
+							System.out.println("Do you want to continue working(y/n) : ");
+							char l = sc.next().charAt(0);
+							if (l != 'y') {
+								login.setCheck(false);
 								break;
 							}
-							break;
-						case 3:
-							// view the transaction history of the account with the date
-							TransactionPojo hist = new TransactionPojo();
-							System.out.println("Which account do you want to see the transaction history of");
-							System.out.println("1: " + account.getAccountName());
-							System.out.println("2: " + account.getAccountName2());
-							// transferService
-							int tHist = sc.next().charAt(0);
-							if (tHist == 1) {
 
-							} else if (tHist == 2) {
-
-							}
-							break;
-						case 4:
-
-							System.out.println("************************************");
-							System.out.println("Exiting System....");
-							System.out.println("Thank you!");
-							System.out.println("************************************");
-							try {
-								customerService.exitApplication();
-							} catch (SystemException e) {
-								// TODO Auto-generated catch block
-								LOG.error(e);
-								System.out.println(e.getMessage());
-							}
-							System.exit(0);
-
-						}
-						System.out.println("Do you want to continue working(y/n) : ");
-						char l = sc.next().charAt(0);
-						if (l != 'y') {
-							login.setCheck(false);
-							break;
+						} else {
+							System.out.println("incorrect login, please try again.");
 						}
 
-					} else {
-						System.out.println("incorrect login, please try again.");
 					}
-
-				}
 				}
 				// switch()
 
