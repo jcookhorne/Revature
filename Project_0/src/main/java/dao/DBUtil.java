@@ -14,8 +14,7 @@ public class DBUtil {
 	
 	static {
 		try {
-			Class.forName("org.postgresql.Driver");
-			System.out.println("Driver Loaded");
+			Class.forName("org.postgresql.Driver");			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,7 +30,6 @@ public class DBUtil {
 		if (conn == null) {
 			try {
 				conn = DriverManager.getConnection(connectionUrl, username, password);
-				System.out.println("Connections established");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				throw new SystemException();

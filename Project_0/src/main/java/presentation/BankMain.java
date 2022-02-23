@@ -45,12 +45,13 @@ public class BankMain {
 		boolean flag = true;
 		while (flag) {
 			// Beginning login window
+
 			System.out.println("Login as employee or a customer");
 			System.out.println("1: for employee");
 			System.out.println("2: for customer");
 			answer = sc.nextInt();
+
 			System.out.println("***********************************************************");
-			;
 			sc.nextLine();// being skipped by sc.nextInt???
 			if (answer == 1) {
 				// Employee login window
@@ -145,7 +146,7 @@ public class BankMain {
 						}
 
 						System.out.println("***********************************************************");
-						// it to the regulare customer table and giving the customer a user and password
+						// it to the regular customer table and giving the customer a user and password
 						System.out.println("Please give the user a Username for their account ");
 						account.setAccountUsername(sc.nextLine());
 
@@ -319,7 +320,7 @@ public class BankMain {
 								break;
 							case 2:
 								// Transfer money from either checking or savings to the other
-								
+
 								transaction.setTranUsername(login.getAccountUsername());
 								transaction.setTranPassword(login.getAccountPassword());
 								System.out.println("Which account do you wanna transfer money from");
@@ -341,7 +342,7 @@ public class BankMain {
 										LOG.error(e);
 										System.out.println(e.getMessage());
 									}
-									
+
 								} else if (tran == 2) {
 									transaction.setCheck(true);
 									System.out.println(
@@ -357,7 +358,7 @@ public class BankMain {
 										LOG.error(e);
 										System.out.println(e.getMessage());
 									}
-									
+
 								}
 								break;
 							case 3:
@@ -367,15 +368,16 @@ public class BankMain {
 								hist.setTranPassword(login.getAccountPassword());
 								// transferService
 								List<TransactionPojo> history;
-								
+
 								try {
 									history = transactionService.transactionHistory(hist);
 									Iterator<TransactionPojo> itr = history.iterator();
-									while(itr.hasNext()) {
+									while (itr.hasNext()) {
 										TransactionPojo tp = itr.next();
-										System.out.println("transaction id: " + tp.getTransaction_id() + " From Account Id: "+
-										tp.getFromAccountId()+ " To Account ID: " + tp.getToAccountId()+ " Tranfer Amount: "+
-												tp.getTransferAmount()+ " Date: " + tp.getDate());
+										System.out.println("transaction id: " + tp.getTransaction_id()
+												+ " From Account Id: " + tp.getFromAccountId() + " To Account ID: "
+												+ tp.getToAccountId() + " Tranfer Amount: " + tp.getTransferAmount()
+												+ " Date: " + tp.getDate());
 									}
 									System.out.println("Thats all of your transactions. ");
 								} catch (SystemException e1) {

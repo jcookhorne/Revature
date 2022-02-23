@@ -1,0 +1,4 @@
+toggle the contenst of a paragraph tag using a button and on click event
+haave a drop down with colors red blue green and select color changes background
+place two text boxes and a copy button copy conten from one and paste to another
+simple calculator
