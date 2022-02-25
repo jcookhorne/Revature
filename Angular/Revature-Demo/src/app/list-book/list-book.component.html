@@ -1,0 +1,28 @@
+<div class ="container">
+    <div class="container">
+        <h3>List Book Component</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of allBooks">
+                    <td>{{ book.bookId }}</td>
+                    <td><img [src]="book.bookImageUrl" width="150px" height="100px"/></td>
+                    <td>{{ book.bookTitle }}</td>
+                    <td>{{ book.bookAuthor }}</td>
+                    <td>{{ book.bookGenre }}</td>
+                    <td>{{ book.bookCost }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+

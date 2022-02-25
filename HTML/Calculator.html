@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width= device-width, initial-scale=1">
+    <meta charset=  "UTF - 8">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="Calculator.css" media="screen">
+</head>
+<body>
+
+    <ul class ="navigation">
+        <div id="myLinks">
+            <li ><a href="IndexRevature.html">Toggle Text page</a></li>
+            <li ><a href="ToggleText.html">Calculator</a></li>
+     </ul>
+<!-- Adding in buttons -->
+<div class="cal">
+
+<input type="text" id="result">
+<br><br>
+
+<input id = "c" type="button" value="c" onclick="clr()">
+<!--input id = "^2" type="button" value="^2" onclick="show('^2')"/-->
+<!--input id = "%" type="button" value="%" onclick="show('%')"/-->
+
+
+<br><br>
+
+<input id = "7" type="button" value="7" onclick="show('7')"/>
+<input id = "8" type="button" value="8" onclick="show('8')"/>
+<input id = "9" type="button" value="9" onclick="show('9')"/>
+<input id = "*" type="button" value="*" onclick="show('*')"/>
+
+<br><br>
+
+<input id = "4" type="button" value="4" onclick="show('4')"/>
+<input id = "5" type="button" value="5" onclick="show('5')"/>
+<input id = "6" type="button" value="6" onclick="show('6')"/>
+<input id = "-" type="button" value="-" onclick="show('-')"/>
+
+<br><br>
+
+<input id = "1" type="button" value="1" onclick="show('1')"/>
+<input id = "2" type="button" value="2" onclick="show('2')"/>
+<input id = "3" type="button" value="3" onclick="show('3')"/>
+<input id = "+" type="button" value="+" onclick="show('+')"/>
+
+<br><br>
+
+<input id = "0" type="button" value="0" onclick="show('0')">
+<input id = "." type="button" value="." onclick="show('.')">
+<input id = "=" type="button" value="=" onclick="solve('=') ">
+<input id = "/" type="button" value="/" onclick="show('/')"/>
+
+</div>
+
+</body>
+<script>
+    //function that display value
+    const show = (val) =>
+    {
+        document.getElementById("result").value+=val
+    }
+      
+    //function that evaluates the digit and return result
+    function solve()
+    {
+        let x = document.getElementById("result").value
+        let y = eval(x)
+        document.getElementById("result").value = y
+    }
+      
+    //function that clear the display
+    function clr()
+    {
+        document.getElementById("result").value = ""
+    }
+</script>
+</html>
