@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    #p{
+        width: 100%;
+    }
+</style>
+    <head>
+
+    <body>
+        <h1>Toggle Text</h1>
+        <ul class ="navigation">
+            <div id="myLinks">
+                <li ><a href="IndexRevature.html">Toggle Text page</a></li>
+                <li ><a href="Calculator.html">Calculator</a></li>
+         </ul>
+         <button onclick="myFunction()">paragraph toggle</button>
+        <p id="toggle"> 
+            This is the text that is about me i dont know what to really put here
+            but thank you for reading this you have been great.
+        </p>
+        
+       
+    </body>
+<script>
+    
+    function myFunction(){
+    var element = document.getElementById(toggle)
+    if(toggle.style.display == "none"){
+        toggle.style.display = "block";
+    }else{
+        toggle.style.display = "none";
+    }   
+    }
+</script>
+
+</head>
+</html>

@@ -1,0 +1,23 @@
+/** This is the CSS sheet for the calculator*/
+body{
+    background: rgb(196, 182, 182);
+}
+.cal{
+    border: 5px solid black;
+    box-shadow: 10px 10px 20px black; 
+    background: white;
+    width: 15%;
+    height: auto;
+    margin-top: 15%;
+    margin-left: 45%;
+    
+}
+.button{
+    
+    font-size: 2vw;
+}
+
+input[type=text]{
+    width: 50%;
+    font-size: 2vw;
+}

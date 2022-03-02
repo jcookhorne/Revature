@@ -2,6 +2,7 @@ package service;
 
 import dao.CustomerDao;
 import dao.CustomerDaoImpl;
+import exceptions.SystemException;
 import pojo.CustomerPojo;
 
 public class CustomerServiceImpl implements CustomerService{
@@ -11,27 +12,21 @@ public class CustomerServiceImpl implements CustomerService{
 	public CustomerServiceImpl() {
 		customerDao = new CustomerDaoImpl();
 	}
+	
 
-	@Override
-	public CustomerPojo customerLogin(CustomerPojo customerPojo) {
-		// TODO Auto-generated method stub
-		return customerDao.customerLogin(customerPojo);
-	}
-
-	public CustomerPojo allAccountInformation(CustomerPojo custoemrPojo) {
-		// TODO Auto-generated method stub
-		return customerDao.allAccountInformation(custoemrPojo);
-	}
-
-	public CustomerPojo accountDetail(int customerId) {
-		// TODO Auto-generated method stub
-		return customerDao.accountDetail( customerId);
-	}
-
-	public CustomerPojo creatingAccount(CustomerPojo customerPojo) {
+	public CustomerPojo creatingAccount(CustomerPojo customerPojo)throws SystemException {
 		
 		return customerDao.creatingAccount(customerPojo);
 	}
+
+
+	@Override
+	public void exitApplication() throws SystemException {
+		// TODO Auto-generated method stub
+		customerDao.exitApplication();
+	}
+
+
 
 	
 

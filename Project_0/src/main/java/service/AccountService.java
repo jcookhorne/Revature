@@ -1,10 +1,15 @@
 package service;
 
+import exceptions.SystemException;
 import pojo.AccountPojo;
 
 public interface AccountService {
-	AccountPojo transfer(int accountId);
-
-	AccountPojo transcationHistory(AccountPojo accountPojo);
+	
+	AccountPojo accountCreate(AccountPojo accountPojo)throws SystemException;
+	
+	AccountPojo accountInfo(AccountPojo accountPojo)throws SystemException;
+	
+	
+	AccountPojo accountLogin(AccountPojo accountPojo)throws SystemException;
 
 }

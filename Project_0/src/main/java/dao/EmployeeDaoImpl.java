@@ -1,22 +1,29 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import pojo.AccountPojo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import exceptions.NothingPending;
+import exceptions.SystemException;
 import pojo.CustomerPojo;
 import pojo.EmployeePojo;
 
 public class EmployeeDaoImpl implements EmployeeDao {
+	
+	public static final Logger LOG = LogManager.getLogger(EmployeeDaoImpl.class);
 
 	@Override
-	public EmployeePojo employeeLogin(EmployeePojo employeePojo) {
+	public EmployeePojo employeeLogin(EmployeePojo employeePojo)throws SystemException{
 		// TODO Auto-generated method stub
+		LOG.info("Entered employeeLogin() in EmployeeDAO");
 		Connection conn = DBUtil.getConnected();
 
 		try {
@@ -25,7 +32,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 					+ "'AND password='" + employeePojo.getEmployeePassword() + "'";
 			ResultSet rs = st.executeQuery(query);
 			if (rs.next()) {
-				System.out.println("You have logged in thank you");
 				employeePojo.setCheck(true);
 			} else {
 				employeePojo.setCheck(false);
@@ -33,14 +39,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SystemException();
 		}
-
+		LOG.info("Exited employeeLogin() in EmployeeDAO");
 		return null;
 	}
 
-	public List<CustomerPojo> customersPending() {
+	public List<CustomerPojo> customersPending()throws SystemException, NothingPending {
 		// TODO Auto-generated method stub
+		LOG.info("Entered customersPending() in EmployeeDAO");
 		List<CustomerPojo> allPending = new ArrayList<CustomerPojo>();
 		Connection conn = DBUtil.getConnected();
 
@@ -52,29 +59,35 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			while (rs.next()) {
 				CustomerPojo pending = new CustomerPojo(rs.getInt(1),
 						rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+						rs.getString(5), rs.getString(6), rs.getString(7));
 				allPending.add(pending);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SystemException();
 		}
+		if (allPending.isEmpty()) {
+			throw new NothingPending();
+		}
+		LOG.info("Exited customerPending() in EmployeeDAO");
 		return allPending;
 	}
 
-	public CustomerPojo customerRegistration(CustomerPojo customerPojo) {
+	public CustomerPojo customerRegistration(CustomerPojo customerPojo)throws SystemException {
 		Connection conn = DBUtil.getConnected();
-		AccountPojo account = new AccountPojo();
+		LOG.info("Entered customerRegistration() in EmployeeDAO");
 		// checking if its approve or deny
 		if (customerPojo.isCheck() == true) {
 			try {
 				Statement st = conn.createStatement();
-				
 				// Transferring from pending to customer details ------ one table to the next
 				String query = "INSERT INTO customer_details (first_name, last_name, address, email, phone_number, social_security)"
 						+ "SELECT first_name, last_name, address, email, phone_number, social_security FROM customer_pending "
 						+ "WHERE customer_id= " + customerPojo.getCustomerId();
 				int rows = st.executeUpdate(query);
+				
+				String query2 = "DELETE FROM customer_pending WHERE customer_id= " + customerPojo.getCustomerId();
+				int delete = st.executeUpdate(query2);
 				// creating new customerId that belongs to customer_details table
 				ResultSet rs = st.executeQuery("SELECT MAX(customer_id) AS last_Id FROM customer_details");
 				if (rs.next()) {
@@ -82,35 +95,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				
 				customerPojo.setCustomerId(rows2);
 				}
-				// using new customerId as the key to update table and add in employee
-				// set up username and password for current customer
-				String query3 = "UPDATE customer_details SET username='" + customerPojo.getCustomerUsername()
-						+ "'WHERE customer_id="+ customerPojo.getCustomerId();
-				int rows3 = st.executeUpdate(query3);
-				String queryPass = "UPDATE customer_details SET password='" + customerPojo.getCustomerPassword()
-				+ "'WHERE customer_id="+ customerPojo.getCustomerId();
-				int rowP = st.executeUpdate(queryPass);
-				// creating first account for customer
-				String query4 = "INSERT INTO account_details(customer_id, account_name) VALUES("
-						+ customerPojo.getCustomerId()  + ",'" + account.getAccountName()+ "')";
-				int rows4 = st.executeUpdate(query4);
-				// Creating second account for customer
-				String query5 = "INSERT INTO account_details(account_name, customer_id) VALUES("
-						+ customerPojo.getCustomerId()  + ",'" + account.getAccountName2() + "')";
-				int rows5 = st.executeUpdate(query5);
-				// Transferring starting balance
-
-				String query6 = "UPDATE account_details SET account_balance=" + customerPojo.getStartingBalance()
-						+ "WHERE account_name='" + account.getAccountName() + "' AND customer_id="
-						+ customerPojo.getCustomerId();
-				int rows6 = st.executeUpdate(query6);
-
-				// removing data from customerPending because they are not pending anymore
-				String query7 = "DELETE FROM customer_pending WHERE customer_id= " + customerPojo.getCustomerId();
-				int rows7 = st.executeUpdate(query7);
+			
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new SystemException();
 			}
 		} else if (customerPojo.isCheck() == false) {
 			// String query =
@@ -121,25 +110,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new SystemException();
 			}
 		}
+		LOG.info("Exited customerRegistration() in EmployeeDAO");
 		return null;
 	}
 
-	public EmployeePojo employeeInformation(EmployeePojo employeePojo) {
-		Connection conn = DBUtil.getConnected();
 
-		try {
-			Statement st = conn.createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public List<CustomerPojo> displayAllCustomers() {
+	public List<CustomerPojo> displayAllCustomers()throws SystemException {
+		LOG.info("Entered displayAllCustomers() in EmployeeDAO");
 		Connection conn = DBUtil.getConnected();
 		List<CustomerPojo> listCust = new ArrayList<CustomerPojo>();
 		
@@ -151,14 +131,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				CustomerPojo allcust = new CustomerPojo(rs.getInt(1),
 						rs.getString(2), rs.getString(3),
 						rs.getString(4), rs.getString(5), 
-						rs.getString(6), rs.getString(7), 
-						rs.getString(8), rs.getString(9));
+						rs.getString(6), rs.getString(7));
 				
 				listCust.add(allcust);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SystemException();
 		}
 		return listCust;
 	}

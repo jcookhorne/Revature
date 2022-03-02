@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import exceptions.SystemException;
+
 public class DBUtil {
 	// Using static to save memory because we only wanna call this once when
 	// for each method.
@@ -12,8 +14,7 @@ public class DBUtil {
 	
 	static {
 		try {
-			Class.forName("org.postgresql.Driver");
-			System.out.println("Driver Loaded");
+			Class.forName("org.postgresql.Driver");			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -22,19 +23,28 @@ public class DBUtil {
 	}
 
 	// Step 2 connect to Database
-	static Connection getConnected() {
+	static Connection getConnected()throws SystemException  {
 		String username = "postgres";
 		String password = "Yeshua7753";
 		String connectionUrl = "jdbc:postgresql://127.0.0.1:5432/bank";
 		if (conn == null) {
 			try {
 				conn = DriverManager.getConnection(connectionUrl, username, password);
-				System.out.println("Connections established");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new SystemException();
 			}		
 		}
 		return conn;
+	}
+	
+	
+	
+	static void closeConnection()throws SystemException {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			throw new SystemException();
+		}
 	}
 }
