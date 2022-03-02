@@ -13,6 +13,7 @@ import { ListBookComponent } from './Book/list-book/list-book.component';
 import { EditBookComponent } from './Book/edit-book/edit-book.component';
 import { LoginComponent } from './user/login/login.component';
 import { LogoutComponent } from './user/logout/logout.component';
+import { HomeComponent } from './employee/home/home.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { LogoutComponent } from './user/logout/logout.component';
     EditBookComponent,
     LoginComponent,
     LogoutComponent,
+    HomeComponent,
     
   ],
   imports: [
