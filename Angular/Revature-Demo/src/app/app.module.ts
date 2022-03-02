@@ -9,7 +9,11 @@ import { CopyComponent } from './copy/copy.component';
 import { CounterComponent } from './counter/counter.component';
 import { FormsModule } from '@angular/forms';
 import { ListFruitComponent } from './list-fruit/list-fruit.component';
-import { ListBookComponent } from './list-book/list-book.component';
+import { ListBookComponent } from './Book/list-book/list-book.component';
+import { EditBookComponent } from './Book/edit-book/edit-book.component';
+import { LoginComponent } from './user/login/login.component';
+import { LogoutComponent } from './user/logout/logout.component';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { ListBookComponent } from './list-book/list-book.component';
     CopyComponent,
     CounterComponent,
     ListFruitComponent,
-    ListBookComponent
+    ListBookComponent,
+    EditBookComponent,
+    LoginComponent,
+    LogoutComponent,
+    
   ],
   imports: [
     BrowserModule,

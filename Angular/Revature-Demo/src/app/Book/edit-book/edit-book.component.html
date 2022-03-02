@@ -1,0 +1,83 @@
+<div class="container m-5">
+  <div class="card-header bg-warning text-white">Update a Book</div>
+  <form #myFormTemplate="ngForm" (ngSubmit)="updateBook()">
+          <div class="card-body">   
+              <div class="mb-3 mt-3">
+                  <label for="title" class="form-label">Book ID :</label>
+                  {{ newBook.bookId }}
+                  </div>
+              <div class="mb-3 mt-3">
+                  <label for="title" class="form-label">Book Title:</label>
+                  <input 
+                      type="text" 
+                      class="form-control" 
+                      id="title" 
+                      placeholder="Enter book title" 
+                      name="bookTitle"
+                      required
+                      #myTitle="ngModel"
+                      (change)="test(myTitle)"
+                      [(ngModel)]="newBook.bookTitle">
+                  <div *ngIf="!myTitle.valid" class="small text-danger">Book Title is required!</div>
+              </div>
+              <div class="mb-3 mt-3">
+                  <label for="author" class="form-label">Book Author:</label>
+                  <input 
+                      type="text" 
+                      class="form-control" 
+                      id="author" 
+                      placeholder="Enter book author" 
+                      name="bookAuthor"
+                      required
+                      #myAuthor="ngModel"
+                      [(ngModel)]="newBook.bookAuthor">
+                      <div *ngIf="!myAuthor.valid" class="small text-danger">Book Author is required!</div>
+                  </div>
+                  <div class="mb-3 mt-3">
+                  <label for="genre" class="form-label">Book Genre:</label>
+                  <input 
+                      type="text" 
+                      class="form-control" 
+                      id="genre" 
+                      placeholder="Enter book genre" 
+                      name="bookGenre"
+                      required
+                      #myGenre="ngModel"
+                      [(ngModel)]="newBook.bookGenre">
+                      <div *ngIf="!myGenre.valid" class="small text-danger">Book Genre is required!</div>
+                  </div>
+                  <div class="mb-3 mt-3">
+                  <label for="cost" class="form-label">Book Cost:</label>
+                  <input 
+                      type="text" 
+                      class="form-control" 
+                      id="cost" 
+                      placeholder="Enter book cost" 
+                      name="bookCost"
+                      required
+                      #myCost="ngModel"
+                      [(ngModel)]="newBook.bookCost">
+                      <div *ngIf="!myCost.valid" class="small text-danger">Book Cost is required!</div>
+                  </div>
+                  <div class="mb-3 mt-3">
+                  <label for="image" class="form-label">Book Image URL:</label>
+                  <input 
+                      type="text" 
+                      class="form-control" 
+                      id="image" 
+                      placeholder="Enter book image URL" 
+                      name="bookImageUrl"
+                      required
+                      #myImage="ngModel"
+                      [(ngModel)]="newBook.bookImageUrl">
+                      <div *ngIf="!myImage.valid" class="small text-danger">Book Image URL is required!</div>
+                  </div>
+              </div>
+          <div class="card-footer bg-warning">
+              <!-- <button type="button" class="btn btn-light" (click)="updateBook()"> -->
+              <button [disabled]="!myFormTemplate.valid" type="submit" class="btn btn-light">
+                  UPDATE
+              </button>
+          </div>
+      </form>
+</div>
