@@ -1,27 +1,27 @@
-<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
-    <div class="container-fluid">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="display">Display Component</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  routerLink="counter">Counter Component</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  routerLink="copy">Copy Component</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  routerLink="list-fruit">List Fruit Component</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link"  routerLink="list-book">Book Component</a>
-          </li>
-          <li class="nav-item"*ngif="isLoggedIn() == false">
-            <a class="nav-link"  routerLink="login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"  routerLink="logout">Logout</a>
-          </li>
-      </ul>
-    </div>
-  </nav>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngIf="isLoggedIn()==true && getRole()=='customer'">
+        <a class="nav-link" routerLink="display">Display Component</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn()==true && getRole()=='customer'">
+        <a class="nav-link" routerLink="copy">Copy Component</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn()==true && getRole()=='customer'">
+        <a class="nav-link" routerLink="counter">Counter Component</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn()==true && getRole()=='customer'">
+          <a class="nav-link" routerLink="list-fruit">List Fruit Component</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn()==true && getRole()=='admin'">
+      <a class="nav-link" routerLink="book-crud">Book Component</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn()==false">
+        <a class="nav-link" routerLink="login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn()==true">
+        <a class="nav-link" routerLink="logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

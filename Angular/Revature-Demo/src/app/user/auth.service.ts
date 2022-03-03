@@ -9,7 +9,7 @@ export class AuthService {
 // purpose of this service is to store and retrieve user info from browser storage
 // also tell if a person has logged in or logged out
   constructor() { }
-  loggedin: boolean = false;
+  loggedIn: boolean = false;
   storeUser(user:User): void{
     sessionStorage.setItem("userInfo", JSON.stringify(user));
 

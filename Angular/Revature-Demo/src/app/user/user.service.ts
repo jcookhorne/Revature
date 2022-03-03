@@ -16,14 +16,14 @@ validateUser(newUser: User): User{
       // 1. store user information in the browser storage
       this.authService.storeUser(newUser);
       // 2. mark that we have logged in 
-      this.authService.loggedin=true;
+      this.authService.loggedIn=true;
 
     }else if(newUser.role == "customer" && newUser.userName=="customer" && newUser.password == "customer"){
         // user has successfully logged in as an admin
       // 1. store user information in the browser storage
       this.authService.storeUser(newUser);
       // 2. mark that we have logged in 
-      this.authService.loggedin=true;
+      this.authService.loggedIn=true;
     }else{
       //invalid credentials
       newUser ={

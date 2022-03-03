@@ -15,7 +15,7 @@ export class LogoutComponent implements OnInit {
     // destroy the user info stored in the session Storage
     this.authService.destroyUser();
 
-    this.authService.loggedin =false;
+    this.authService.loggedIn =false;
 
     this.router.navigate(['login']);
 
